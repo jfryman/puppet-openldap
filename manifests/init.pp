@@ -19,16 +19,25 @@ class ldap(
   include stdlib
   include ldap::params
   
+  # Take advantage of the Anchor Pattern.
   anchor { 'ldap::begin': }
   anchor { 'ldap::end': }
 
+  # Define Client Specific Information
   if $client == 'true' {
     class { 'ldap::client':
       ensure => 'present',
+      require => Anchor['ldap::begin'],
+      before  => Anchor['ldap::end'],
     }
-  } elsif $server == 'true' {
+  }
+  
+  # Define Server Specific Information
+  if $server == 'true' {
     class { 'ldap::server': 
       server_type => $server_type,
+      require     => Anchor['ldap::begin'],
+      before      => Anchor['ldap::end'],
     }
   }
 }
