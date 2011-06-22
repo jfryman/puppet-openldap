@@ -1,0 +1,19 @@
+#
+# LDAP Defaults
+#
+# See ldap.conf(5) for details
+# This file should be world readable but not world writable.
+
+SIZELIMIT      <%= scope.lookupvar('ldap::params::op_sizelimit') %>
+TIMELIMIT      <%= scope.lookupvar('ldap::params::op_timelimit') %>
+DEREF          <%= scope.lookupvar('ldap::params::op_deref') %>
+
+BASE <%= base_dn %>
+
+<% if ssl == 'true' %>
+URI <% servers.each do |server| %> ldaps://<%= server %> <% end %>
+<% else %>
+URI <% servers.each do |server| %> ldap://<%= server %> <% end %>
+<% end %>
+
+TLS_CACERTDIR /etc/openldap/cacerts
