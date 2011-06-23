@@ -1,0 +1,31 @@
+#
+# See slapd.conf(5) for details on configuration options.
+# This file should NOT be world readable.
+#
+include <%= scope.lookupvar('ldap::params::lp_openldap_conf_dir') %>/schema/core.schema
+include <%= scope.lookupvar('ldap::params::lp_openldap_conf_dir') %>/schema/cosine.schema
+include <%= scope.lookupvar('ldap::params::lp_openldap_conf_dir') %>/schema/nis.schema
+include <%= scope.lookupvar('ldap::params::lp_openldap_conf_dir') %>/schema/inetorgperson.schema
+
+pidfile		<%= scope.lookupvar('ldap::params::lp_openldap_run_dir') %>/slapd.pid
+argsfile	<%= scope.lookupvar('ldap::params::lp_openldap_run_dir') %>/slapd.args
+
+loglevel <%= scope.lookupvar('ldap::params::lp_openldap_loglevel') %>
+sizelimit <%= scope.lookupvar('ldap::params::lp_openldap_sizelimit') %>
+tool-threads <%= scope.lookupvar('ldap::params::lp_openldap_tool_threads') %>
+
+# Include all domains configured on this host
+include <%= scope.lookupvar('ldap::params::lp_openldap_conf_dir') %>/domains.conf
+
+# Include all replication agreements configured on this host
+include <%= scope.lookupvar('ldap::params::lp_openldap_conf_dir') %>/replication.conf
+
+# Include all extra configured schema types configured on this host
+include <%= scope.lookupvar('ldap::params::lp_openldap_conf_dir') %>/schema.conf
+
+# TODO: Add SSL Support
+# TLSCACertificateFile /etc/pki/tls/certs/ca-bundle.crt
+# TLSCertificateFile /etc/pki/tls/certs/slapd.pem
+# TLSCertificateKeyFile /etc/pki/tls/certs/slapd.pem
+
+<% if scope.lookupvar('ldap::params::lp_openldap_allow_ldapv2') == 'true' %>allow bind_v2<% end %>

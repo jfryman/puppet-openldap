@@ -4,9 +4,9 @@
 # See ldap.conf(5) for details
 # This file should be world readable but not world writable.
 
-SIZELIMIT      <%= scope.lookupvar('ldap::params::op_sizelimit') %>
-TIMELIMIT      <%= scope.lookupvar('ldap::params::op_timelimit') %>
-DEREF          <%= scope.lookupvar('ldap::params::op_deref') %>
+SIZELIMIT      <%= scope.lookupvar('ldap::params::lp_sizelimit') %>
+TIMELIMIT      <%= scope.lookupvar('ldap::params::lp_timelimit') %>
+DEREF          <%= scope.lookupvar('ldap::params::lp_deref') %>
 
 BASE <%= base_dn %>
 
