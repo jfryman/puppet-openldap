@@ -19,5 +19,5 @@ class ldap::server::openldap(
   
   anchor { 'ldap::server::openldap::end': 
     require => Class['ldap::server::openldap::service'],
-  }
+  } 
 }

@@ -7,7 +7,8 @@ define ldap::define::domain(
   # TODO: Add regex validation checks for facts. 
   
   
-  # determine server type based on fact
+  # determine server type based on fact. 
+  # TODO: How do I make this check happen on the same run? 
   if $ldapserver == 'openldap' {
     ldap::server::openldap::define::domain { $name:
       ensure => $ensure,

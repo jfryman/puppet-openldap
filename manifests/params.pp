@@ -1,11 +1,11 @@
 class ldap::params {
   ## Generic Setup Parameters
-  $lp_dameon_user = $operatingsystem ? {
+  $lp_daemon_user = $operatingsystem ? {
     /(?i-mx:fedora|rhel|centos|suse|opensuse)/ => 'ldap',
   }
   
   $lp_daemon_group = $operatingsystem ? {
-    /(?i-mx:fedora|rhel|centos|suse|opensuse)/ => $lp_damon_user,
+    /(?i-mx:fedora|rhel|centos|suse|opensuse)/ => 'ldap',
   }
   
   $lp_tmp_dir = '/tmp/openldap'

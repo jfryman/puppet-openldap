@@ -1,0 +1,24 @@
+# example.org
+dn: <%= basedn %>
+objectClass: dcObject
+objectClass: organization
+o: <%= name %>
+dc: <%= name.split('.')[0] %>
+
+dn: <%= rootdn %>,<%= basedn %>
+cn: <%= rootdn.gsub!(/^(..)=/, '') %>
+description: LDAP administrator
+roleOccupant: <%= basedn %>
+objectClass: organizationalRole
+objectClass: top
+
+dn: ou=People,<%= basedn %>
+ou: People
+objectClass: top
+objectClass: organizationalUnit
+
+# Group, example.org
+dn: ou=Group,<%= basedn %>
+ou: Group
+objectClass: top
+objectClass: organizationalUnit

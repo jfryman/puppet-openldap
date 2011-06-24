@@ -33,7 +33,7 @@
 database	bdb
 suffix		"<%= basedn %>"
 rootdn		"<%= rootdn %>,<%= basedn %>"
-rootpw    "<%= rootpw %>"
+rootpw    <%= rootpw %>
 
 directory	<%= scope.lookupvar('ldap::params::lp_openldap_var_dir') %>/<%= name %>
 

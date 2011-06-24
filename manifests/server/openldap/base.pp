@@ -1,7 +1,7 @@
 class ldap::server::openldap::base {
   File {
     owner => 'root',
-    group => $ldap::params::lp_dameon_group,
+    group => $ldap::params::lp_daemon_group,
     mode  => '0640',
   }
   
@@ -12,7 +12,7 @@ class ldap::server::openldap::base {
   
   file { "${ldap::params::lp_openldap_conf_dir}/slapd.conf":
     ensure  => file,
-    group   => $ldap::params::lp_dameon_user,
+    group   => $ldap::params::lp_daemon_user,
     content => template('ldap/server/openldap/slapd.conf.erb')
   }
   
@@ -51,15 +51,21 @@ class ldap::server::openldap::base {
   # and consecutive service execution and/or executions do not fail out
   file { "${ldap::params::lp_openldap_conf_dir}/replication.conf":
     ensure => file,
+    group  => $ldap::params::lp_daemon_group,
   }
   file { "${ldap::params::lp_tmp_dir}/replication.d/00_default":
     ensure => file,
   }
   file { "${ldap::params::lp_openldap_conf_dir}/domains.conf":
     ensure => file,
+    group  => $ldap::params::lp_daemon_group,
   }
   file { "${ldap::params::lp_tmp_dir}/domains.d/00_default":
     ensure => file,
+  }
+  file { "${ldap::params::lp_openldap_conf_dir}/schema.conf":
+    ensure => file,
+    group  => $ldap::params::lp_daemon_group,
   }
   file { "${ldap::params::lp_tmp_dir}/schema.d/00_default":
     ensure => file,
@@ -68,8 +74,8 @@ class ldap::server::openldap::base {
   file {"${ldap::params::lp_openldap_conf_dir}":
     ensure => directory,
     mode   => '0700',
-    owner  => $ldap::params::lp_dameon_user,
-    group  => $ldap::params::lp_dameon_group,
+    owner  => $ldap::params::lp_daemon_user,
+    group  => $ldap::params::lp_daemon_group,
   }
   
 }
