@@ -7,6 +7,14 @@ include <%= scope.lookupvar('ldap::params::lp_openldap_conf_dir') %>/schema/cosi
 include <%= scope.lookupvar('ldap::params::lp_openldap_conf_dir') %>/schema/nis.schema
 include <%= scope.lookupvar('ldap::params::lp_openldap_conf_dir') %>/schema/inetorgperson.schema
 
+# Module Loading
+modulepath  <%= scope.lookupvar('ldap::params::lp_openldap_modulepath') %>
+
+<% if scope.lookupvar('ldap::params::lp_openldap_db_type') == 'hdb' %>
+moduleload  back_hdb<% end %>
+<% if scope.lookupvar('ldap::params::lp_openldap_db_type') == 'bdb' %>
+moduleload  back_bdb<% end %>
+
 pidfile		<%= scope.lookupvar('ldap::params::lp_openldap_run_dir') %>/slapd.pid
 argsfile	<%= scope.lookupvar('ldap::params::lp_openldap_run_dir') %>/slapd.args
 
@@ -27,5 +35,6 @@ include <%= scope.lookupvar('ldap::params::lp_openldap_conf_dir') %>/schema.conf
 # TLSCACertificateFile /etc/pki/tls/certs/ca-bundle.crt
 # TLSCertificateFile /etc/pki/tls/certs/slapd.pem
 # TLSCertificateKeyFile /etc/pki/tls/certs/slapd.pem
+
 
 <% if scope.lookupvar('ldap::params::lp_openldap_allow_ldapv2') == 'true' %>allow bind_v2<% end %>

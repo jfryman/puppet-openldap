@@ -61,6 +61,7 @@ define ldap::server::openldap::define::domain (
     path      => '/bin:/sbin:/usr/bin:/usr/sbin',
     user      =>  $ldap::params::lp_daemon_user,
     group     =>  $ldap::params::lp_daemon_group,
+    logoutput => 'true',
     creates   => "${ldap::params::lp_openldap_var_dir}/${name}/id2entry.bdb",
     require   => [
       Exec["rebuild-openldap-domains.conf"], 

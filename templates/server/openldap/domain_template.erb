@@ -30,7 +30,7 @@
 # ldbm and/or bdb database definitions
 #######################################################################
 
-database	bdb
+database	<%= scope.lookupvar('ldap::params::lp_openldap_db_type') %>
 suffix		"<%= basedn %>"
 rootdn		"<%= rootdn %>,<%= basedn %>"
 rootpw    <%= rootpw %>
