@@ -73,9 +73,9 @@ class ldap::server::openldap::base {
 
   file {"${ldap::params::lp_openldap_conf_dir}":
     ensure => directory,
-    mode   => '0700',
-    owner  => $ldap::params::lp_daemon_user,
-    group  => $ldap::params::lp_daemon_group,
+    mode   => '0755',
+    owner  => 'root',
+    group  => 'root',
   }
   
 }

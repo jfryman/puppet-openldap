@@ -1,3 +1,7 @@
+## Note: Default behavior is to remove account from active 
+## configuration in the event of $ensure => absent, however
+## will also keep LDAP directory in the event of backup and/or
+## debug/troubleshooting. 
 define ldap::server::openldap::define::domain (
   $ensure,
   $basedn,
@@ -5,11 +9,15 @@ define ldap::server::openldap::define::domain (
   $rootpw
 ) {
   File {
-    owner => 'root',
-    group => $ldap::params::lp_daemon_group,
-    mode  => '0660',
-    require => Class['ldap::server::openldap::base'],
+    owner   => 'root',
+    group   => $ldap::params::lp_daemon_group,
     before  => Class['ldap::server::openldap::service'],
+    require => Class['ldap::server::openldap::base'],
+  }
+  
+  $directory_ensure = $ensure ? {
+    'present' => 'directory',
+    'absent'  => 'absent',
   }
   
   # Setup the 'include' definition in part of the file fragment
@@ -29,19 +37,21 @@ define ldap::server::openldap::define::domain (
   
   # Create a Database Directory for the LDAP Server to live in
   file { "${ldap::params::lp_openldap_var_dir}/${name}":
-    ensure  => directory,
+    ensure  => $directory_ensure,
     owner   => $ldap::params::lp_daemon_user,
+    group   => $ldap::params::lp_daemon_group,
     recurse => 'true',
   }
   
-  ## Setup Initial Database
+  ## Setup Initial OpenLDAP Database
   file { "${ldap::params::lp_openldap_var_dir}/${name}/DB_CONFIG":
-    ensure  => file,
+    ensure  => $ensure,
     mode    => '0660',
     content => template('ldap/server/openldap/DB_CONFIG.erb'),
   }
   file { "${ldap::params::lp_openldap_var_dir}/${name}/base.ldif":
-    ensure  => file,
+    ensure  => $ensure,
+    owner   => $ldap::params::lp_daemon_user,
     content => template('ldap/server/openldap/base.ldif.erb'), 
     notify  => Exec["bootstrap-ldap-${name}"],
   }
@@ -49,20 +59,12 @@ define ldap::server::openldap::define::domain (
   exec { "bootstrap-ldap-${name}":
     command   => "slapadd -b \"${basedn}\" -v -l ${ldap::params::lp_openldap_var_dir}/${name}/base.ldif",
     path      => '/bin:/sbin:/usr/bin:/usr/sbin',
+    user      =>  $ldap::params::lp_daemon_user,
+    group     =>  $ldap::params::lp_daemon_group,
     creates   => "${ldap::params::lp_openldap_var_dir}/${name}/id2entry.bdb",
-    logoutput => 'true',
-  }
-  
-  ## Setup Replication Database (Move this to Replication)
-  file { "${ldap::params::lp_openldap_var_dir}/${name}/accesslog":
-    ensure => directory,
-    mode   => '0770',
-    owner  => $ldap::params::lp_daemon_user,
-  }
-  file { "${ldap::params::lp_openldap_var_dir}/${name}/accesslog/DB_CONFIG":
-    ensure  => file,
-    mode    => '0660',
-    owner   => $ldap::params::lp_daemon_user,
-    content => template('ldap/server/openldap/DB_CONFIG.erb')
+    require   => [
+      Exec["rebuild-openldap-domains.conf"], 
+      Exec["rebuild-openldap-schema.conf"]
+    ],
   }
 }
