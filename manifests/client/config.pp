@@ -13,11 +13,11 @@ define ldap::client::config (
   
   file { '/etc/ldap.conf':
     ensure  => present,
-    content => template('ldap/nss_pam_ldap.conf.erb'), 
+    content => template('ldap/client/nss_pam_ldap.conf.erb'), 
   }
   
   file { '/etc/openldap/ldap.conf':
     ensure  => present,
-    content => template('ldap/ldap.conf.erb'),
+    content => template('ldap/client/ldap.conf.erb'),
   }
 }
