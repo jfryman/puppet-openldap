@@ -31,8 +31,8 @@ class ldap::params {
   $lp_openldap_db_type      = 'bdb'
   
   $lp_openldap_run_dir = $operatingsystem ? {
-    /(?i-mx:fedora|rhel|centos|suse|opensuse)/ => '/var/run/openldap',
-    /(?i-mx:debian|ubuntu)/                    => '/var/run/slapd',
+    /(?i-mx:fedora|rhel|centos)/          => '/var/run/openldap',
+    /(?i-mx:debian|ubuntu|suse|opensuse)/ => '/var/run/slapd',
   }
   $lp_openldap_service = $operatingsystem ? {
     /(?i-mx:fedora|rhel|centos|suse|opensuse)/ => 'ldap',
