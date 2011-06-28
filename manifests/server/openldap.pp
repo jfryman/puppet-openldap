@@ -12,7 +12,12 @@ class ldap::server::openldap(
   
   class { 'ldap::server::openldap::base':
     require => Class['ldap::server::openldap::package'],
-    notify  => Class['ldap::server::openldap::service'],
+    notify  => Class['ldap::server::openldap::rebuild'],
+  }
+  
+  class { 'ldap::server::openldap::rebuild':
+    require => Class['ldap::server::openldap::base'],
+    notify  => Class['ldap::server::openldap::service']
   }
   
   class { 'ldap::server::openldap::service': }

@@ -11,7 +11,7 @@ define ldap::server::openldap::define::domain (
   File {
     owner   => 'root',
     group   => $ldap::params::lp_daemon_group,
-    before  => Class['ldap::server::openldap::service'],
+    before  => Class['ldap::server::openldap::rebuild'],
     require => Class['ldap::server::openldap::base'],
   }
   
@@ -25,7 +25,7 @@ define ldap::server::openldap::define::domain (
   file { "${ldap::params::lp_tmp_dir}/domains.d/${name}.conf":
     ensure  => $ensure,
     content => "include ${ldap::params::lp_openldap_conf_dir}/domains/${name}.conf\n",
-    notify  => Exec['rebuild-openldap-domains.conf'],
+    notify  => Class['ldap::server::openldap::rebuild'],
   }
   
   # Setup the *actual* configuration file for OpenLDAP
@@ -63,9 +63,7 @@ define ldap::server::openldap::define::domain (
     group     =>  $ldap::params::lp_daemon_group,
     logoutput => 'true',
     creates   => "${ldap::params::lp_openldap_var_dir}/${name}/id2entry.bdb",
-    require   => [
-      Exec["rebuild-openldap-domains.conf"], 
-      Exec["rebuild-openldap-schema.conf"]
-    ],
+    require   => Class['ldap::server::openldap::rebuild'],
+    before    => Class['ldap::server::openldap::service'],
   }
 }

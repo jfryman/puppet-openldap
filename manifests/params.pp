@@ -43,8 +43,8 @@ class ldap::params {
     /(?i-mx:debian|ubuntu)/                    => '/etc/ldap',
   }
   $lp_openldap_var_dir = $operatingsystem ? {
-    /(?i-mx:fedora|rhel|centos|suse|opensuse)/ => '/var/lib/ldap',
-    /(?i-mx:debian|ubuntu)/                    => '/var/lib/slapd',
+    /(?i-mx:fedora|rhel|centos|suse|opensuse|ubuntu)/ => '/var/lib/ldap',
+    /(?i-mx:debian)/                                  => '/var/lib/slapd',
   }
   $lp_openldap_modulepath = $operatingsystem ? {
     /(?i-mx:fedora|rhel|centos|suse|opensuse|debian|ubuntu)/ => '/usr/lib/ldap',
