@@ -25,7 +25,7 @@ class ldap::params {
   
   ## START: OpenLDAP Specific Parameters ##
   $lp_openldap_allow_ldapv2 = 'false'
-  $lp_openldap_loglevel     = '0'
+  $lp_openldap_loglevel     = '8'
   $lp_openldap_sizelimit    = '5000'
   $lp_openldap_tool_threads = '1'
   $lp_openldap_db_type      = 'bdb'
@@ -47,8 +47,7 @@ class ldap::params {
     /(?i-mx:debian|ubuntu)/                    => '/var/lib/slapd',
   }
   $lp_openldap_modulepath = $operatingsystem ? {
-    /(?i-mx:fedora|rhel|centos|suse|opensuse)/ => '/usr/lib/ldap',
-    /(?i-mx:debian|ubuntu)/                    => '/usr/lib/ldap',    
+    /(?i-mx:fedora|rhel|centos|suse|opensuse|debian|ubuntu)/ => '/usr/lib/ldap',
   }
   ## END: OpenLDAP Specific Parameters ##
 }

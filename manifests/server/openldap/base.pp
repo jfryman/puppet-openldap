@@ -46,6 +46,10 @@ class ldap::server::openldap::base {
     purge   => true,
     recurse => true,
   }
+  file {"${ldap::params::lp_openldap_conf_dir}/slapd.d":
+    ensure => 'absent',
+    force  => 'true',
+  }
   
   # These files are here to ensure that a blank file exists
   # and consecutive service execution and/or executions do not fail out
