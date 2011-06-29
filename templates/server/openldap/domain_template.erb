@@ -1,35 +1,4 @@
-# The next three lines allow use of TLS for encrypting connections using a
-# dummy test certificate which you can generate by changing to
-# /etc/pki/tls/certs, running "make slapd.pem", and fixing permissions on
-# slapd.pem so that the ldap user or group can read it.  Your client software
-# may balk at self-signed certificates, however.
-
-
-# Sample access control policy:
-#	Root DSE: allow anyone to read it
-#	Subschema (sub)entry DSE: allow anyone to read it
-#	Other DSEs:
-#		Allow self write access
-#		Allow authenticated users read access
-#		Allow anonymous users to authenticate
-#	Directives needed to implement policy:
-# access to dn.base="" by * read
-# access to dn.base="cn=Subschema" by * read
-# access to *
-#	by self write
-#	by users read
-#	by anonymous auth
-#
-# if no access controls are present, the default policy
-# allows anyone and everyone to read anything but restricts
-# updates to rootdn.  (e.g., "access to * by * read")
-#
-# rootdn can always read and write EVERYTHING!
-
-#######################################################################
-# ldbm and/or bdb database definitions
-#######################################################################
-
+# Managed by Puppet
 database	<%= scope.lookupvar('ldap::params::lp_openldap_db_type') %>
 suffix		"<%= basedn %>"
 rootdn		"<%= rootdn %>,<%= basedn %>"
@@ -43,4 +12,16 @@ index ou,cn,mail,surname,givenname      eq,pres,sub
 index uidNumber,gidNumber,loginShell    eq,pres
 index uid,memberUid                     eq,pres,sub
 index nisMapName,nisMapEntry            eq,pres,sub
+
+# Default Admin ACLs
+access to attrs=userPassword
+    by self write
+    by anonymous auth
+    by dn.base="<%= rootdn %>,<%= basedn %>" write
+    by * none
+access to *
+    by self write
+    by dn.base="<%= rootdn %>,<%= basedn %>" write
+    by * read
+
 
