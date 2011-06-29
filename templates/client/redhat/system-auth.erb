@@ -1,0 +1,23 @@
+# This file is managed by Puppet
+auth        required      pam_env.so
+auth        sufficient    pam_unix.so nullok try_first_pass
+auth        requisite     pam_succeed_if.so uid >= 500 quiet
+<% if ensure_real == 'present' %>auth        sufficient    pam_ldap.so use_first_pass<%end%>
+auth        required      pam_deny.so
+
+account     required      pam_unix.so broken_shadow
+account     sufficient    pam_succeed_if.so uid < 500 quiet
+<% if ensure_real == 'present' %>account     [default=bad success=ok user_unknown=ignore] pam_ldap.so<% end %>
+account     required      pam_permit.so
+
+password    requisite     pam_cracklib.so try_first_pass retry=3
+password    sufficient    pam_unix.so md5 shadow nullok try_first_pass use_authtok
+<% if ensure_real == 'present' %>password    sufficient    pam_ldap.so use_authtok<%end%>
+password    required      pam_deny.so
+
+session     optional      pam_keyinit.so revoke
+session     required      pam_limits.so
+session     [success=1 default=ignore] pam_succeed_if.so service in crond quiet use_uid
+session     required      pam_unix.so
+<% if ensure_real == 'present' %>session     optional      pam_ldap.so<%end%>
+

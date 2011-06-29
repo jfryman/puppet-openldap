@@ -47,7 +47,8 @@ class ldap::params {
     /(?i-mx:debian)/                                  => '/var/lib/slapd',
   }
   $lp_openldap_modulepath = $operatingsystem ? {
-    /(?i-mx:fedora|rhel|centos|suse|opensuse|debian|ubuntu)/ => '/usr/lib/ldap',
+    /(?i-mx:suse|opensuse|debian|ubuntu)/ => '/usr/lib/ldap',
+    /(?i-mx:centos|rhel|oel)/             => 'UNDEF',
   }
   ## END: OpenLDAP Specific Parameters ##
 }

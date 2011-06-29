@@ -1,4 +1,10 @@
-class ldap::client::service {
+class ldap::client::service(
+  $ensure
+) {
+  
+  # TODO: Need to add a translation between passed 'ensure' to this service
+  # state. 
+  
   service { 'nscd':
     enable     => 'true',
     ensure     => 'running',

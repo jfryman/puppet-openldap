@@ -3,21 +3,32 @@ define ldap::client::config (
   $base_dn,
   $ssl,
   $servers
-) {
-  
-  File {
-    owner => 'root',
-    group => 'root',
-    mode  => '0644',
+) {  
+  # Utilize the Anchor Pattern
+  anchor { 'ldap::client::config::begin': 
+    require => Class['ldap::client::base'],
+  }
+  anchor { 'ldap::client::config::end': 
+    notify => Class['ldap::client::service']
   }
   
-  file { '/etc/ldap.conf':
-    ensure  => present,
-    content => template('ldap/client/nss_pam_ldap.conf.erb'), 
+  Class { 
+    base_dn => $base_dn,
+    ssl     => $ssl,
+    servers => $servers,
+    require => Anchor['ldap::client::config::begin'],
+    notify  => Anchor['ldap::client::config::end'],
   }
-  
-  file { '/etc/openldap/ldap.conf':
-    ensure  => present,
-    content => template('ldap/client/ldap.conf.erb'),
+
+  case $operatingsystem {
+    centos,fedora,rhel: {
+      class { 'ldap::client::config::redhat': }
+    }
+    debian,ubuntu: {
+      class { 'ldap::client::config::debian':  }
+    }
+    opensuse,suse: {
+      class { 'ldap::client::config::suse': }
+    }
   }
 }

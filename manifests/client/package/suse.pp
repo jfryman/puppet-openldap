@@ -13,10 +13,12 @@
 # Sample Usage:
 #
 # This class file is not called directly
-class ldap::client::package::suse {
+class ldap::client::package::suse(
+  $ensure
+) {
   $suse_packages = []
   
   package { $suse_packages:
-    ensure => present,
+    ensure => $ensure,
   }
 }

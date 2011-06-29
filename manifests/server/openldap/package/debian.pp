@@ -24,7 +24,13 @@ class ldap::server::openldap::package::debian {
     }
   }
   
-  package { $debian_packages:
+  @package { $debian_packages:
     ensure => present,
+    tag    => 'debian-openldap-server',
   }
+  
+  # Some packages are shared between Client/Server. In order to prevent
+  # a conflict, packages are virtualized and realized to be decleared
+  # once during a catalog compliation. 
+  Package <| tag == 'redhat-openldap-server' |>
 }

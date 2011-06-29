@@ -13,10 +13,18 @@
 # Sample Usage:
 #
 # This class file is not called directly
-class ldap::client::package::redhat {
+class ldap::client::package::redhat(
+  $ensure
+) {
   $redhat_packages = ['openldap', 'openldap-clients', 'nss_ldap']
   
-  package { $redhat_packages:
-    ensure => present,
+  @package { $redhat_packages:
+    ensure => $ensure,
+    tag    => 'redhat',
   }
+  
+  # Some packages are shared between Client/Server. In order to prevent
+  # a conflict, packages are virtualized and realized to be decleared
+  # once during a catalog compliation. 
+  Package <| tag == 'redhat' |>
 }

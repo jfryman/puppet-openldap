@@ -14,6 +14,7 @@
 class ldap(
   $client = 'false',
   $server = 'false',
+  $ssl    = 'false',
   $server_type = 'openldap'
 ) {
   include stdlib
@@ -22,13 +23,17 @@ class ldap(
   # Take advantage of the Anchor Pattern.
   anchor { 'ldap::begin': }
   anchor { 'ldap::end': }
+  
+  Class {
+    require => Anchor['ldap::begin'],
+    before  => Anchor['ldap::end'],
+  }
 
   # Define Client Specific Information
   if $client == 'true' {
     class { 'ldap::client':
       ensure => 'present',
-      require => Anchor['ldap::begin'],
-      before  => Anchor['ldap::end'],
+      ssl    => $ssl,
     }
   }
   
@@ -36,8 +41,7 @@ class ldap(
   if $server == 'true' {
     class { 'ldap::server': 
       server_type => $server_type,
-      require     => Anchor['ldap::begin'],
-      before      => Anchor['ldap::end'],
+      ssl         => $ssl,
     }
   }
 }

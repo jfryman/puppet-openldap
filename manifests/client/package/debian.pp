@@ -13,10 +13,12 @@
 # Sample Usage:
 #
 # This class file is not called directly
-class ldap::client::package::debian {
+class ldap::client::package::debian(
+  $ensure
+) {
   $debian_packages = []
   
   package { $debian_packages:
-    ensure => present,
+    ensure => $ensure,
   }
 }
