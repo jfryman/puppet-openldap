@@ -14,7 +14,6 @@ class ldap::client::base::redhat(
     ensure  => file,
     content => template('ldap/client/redhat/nsswitch.conf.erb'),
   }
-  
   file { '/etc/pam.d/system-auth':
     ensure  => file,
     content => template('ldap/client/redhat/system-auth.erb'),

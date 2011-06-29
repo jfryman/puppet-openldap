@@ -34,3 +34,7 @@ BUG: When testing by applying server-only configuration, manifest will install
 client libraries as well. Does implying server configuration mean that I want
 to automatically setup a client?
     
+    
+Things that are needed:
+  * Authenticated Bind for PAM (Want to create a user to bind as)
+  * 

@@ -20,11 +20,11 @@ class ldap::client::package::redhat(
   
   @package { $redhat_packages:
     ensure => $ensure,
-    tag    => 'redhat',
+    tag    => 'redhat-openldap-client',
   }
   
   # Some packages are shared between Client/Server. In order to prevent
   # a conflict, packages are virtualized and realized to be decleared
   # once during a catalog compliation. 
-  Package <| tag == 'redhat' |>
+  Package <| tag == 'redhat-openldap-client' |>
 }
