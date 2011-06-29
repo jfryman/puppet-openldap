@@ -1,5 +1,6 @@
 class ldap::server(
-  $server_type
+  $server_type,
+  $ssl
 ) {
   
   Class {
