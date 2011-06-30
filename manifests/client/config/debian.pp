@@ -1,3 +1,18 @@
+# Define: ldap::client::config::debian
+#
+# This custom definition sets up all of the necessary configuration
+# Files to configure a cleint to AAA against LDAP servers for Debian Systems
+#
+# Parameters:
+#
+# Actions:
+#
+# 
+# Requires:
+#
+# Sample Usage:
+#
+# This class is not called directly.
 class ldap::client::config::debian(
   $ensure = 'present',
   $base_dn,

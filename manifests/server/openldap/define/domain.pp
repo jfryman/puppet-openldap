@@ -1,7 +1,27 @@
-## Note: Default behavior is to remove account from active 
-## configuration in the event of $ensure => absent, however
-## will also keep LDAP directory in the event of backup and/or
-## debug/troubleshooting. 
+# Define: ldap::server::openldap::domain
+#
+# This custom definition sets up all of the necessary configuration
+# Files to bootstrap a LDAP tree. This uses the File-Fragment
+# pattern to break up and assemble various portions of the configuration.
+#
+# Parameters:
+#
+# *ensure* - (true|false) Enable or disable a configured tree. Disabled trees
+#            will not be deleted, but rather will remain on the file system
+#            for archival purposes. 
+# *basedn* - Base DN for setting up the LDAP server. 
+# *rootdn* - Base DN for the administrator acount on an LDAP server.
+# *rootpw* - Password for the administrator account. Will accept any valid
+#          - Hashed (crypt|(s)md5|(s)sha) or plaintext password. 
+#
+# Actions:
+#
+# Requires:
+#
+# Sample Usage:
+#
+# This class file is not called directly. Rather, it is called via the
+# Proxy definition ldap::define::domain. 
 define ldap::server::openldap::define::domain (
   $ensure,
   $basedn,

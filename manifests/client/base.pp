@@ -1,3 +1,19 @@
+# Class: ldap::client::openldap::base
+#
+# This class routes between default configurations of LDAP client access
+# based on Operating System.
+#
+# Parameters:
+#
+# There are no default parameters for this class.
+#
+# Actions:
+#
+# Requires:
+#
+# Sample Usage:
+#
+# This class file is not called directly.
 class ldap::client::base(
   $ensure,
   $ssl

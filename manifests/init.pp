@@ -1,16 +1,59 @@
 # Class: ldap
 #
-# This module manages ldap
+# This module manages LDAP Server and Clients..
 #
 # Parameters:
+# *client* - Binary Flag (true|false) to configure an LDAP Client 
+# *server* - Binary Flag (true|false) to configure an LDAP Server
+# *server_type* - (openldap|389) configures different types of 
+#                 LDAP servers. Default is OpenLDAP Setup
+# *ssl*         - (true|false) - enable SSL Support. *IN DEVELOPMENT*
 #
 # Actions:
 #
 # Requires:
-#  [puppetlabs-stdlib]
+#  puppetlabs-stdlib - https://github.com/puppetlabs/puppetlabs-stdlib
+#  
+#  Packaged LDAP
+#    - RHEL: EPEL or custom package
+#    - Debian/Ubuntu: Default Install or custom package
+#    - SuSE: Default Install or custom package
+#
 # Sample Usage:
 #
-# [Remember: No empty lines between comments and class definition]
+# Setup (Bootstrap) and Configuration of this module are currently 
+# separated in order to allow for multiple LDAP server definitions
+# and multiple LDAP Trees being managed. 
+#
+# Bootstrap:
+# node 'server.puppetlabs.test' {
+#   class { 'ldap':
+#     server      => 'true',
+#     server_type => 'openldap',
+#     ssl         => 'false',
+#   }
+# }
+# node 'client.puppetlabs.test' {
+#   class {'ldap':
+#     client  => 'true', 
+#     ssl     => 'false',  
+#   }
+# }
+# 
+# Server Configuration:
+# ldap::define::domain {'puppetlabs.test':
+#   basedn   => 'dc=puppetlabs,dc=test',
+#   rootdn   => 'cn=admin',
+#   rootpw   => 'test',
+# }
+# 
+# Client Configuration:
+# ldap::client::config { 'puppetlabs.test':
+#   ensure  => 'present',
+#   servers => 'server',
+#   ssl     => 'false',
+#   base_dn => 'dc=puppetlabs,dc=test',
+# }
 class ldap(
   $client = 'false',
   $server = 'false',

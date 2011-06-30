@@ -1,3 +1,20 @@
+# Class: ldap::server::389
+#
+# This module manages the bootstrap of 389 Server
+# http://directory.fedoraproject.org/. Sets up the 
+# Package-File-Service design pattern.
+#
+# Parameters:
+#
+# There are no default parameters for this class.
+#
+# Actions:
+#
+# Requires:
+#
+# Sample Usage:
+#
+# This class file is not called directly.
 class ldap::server::389(
   $ensure = 'present'
 ) {

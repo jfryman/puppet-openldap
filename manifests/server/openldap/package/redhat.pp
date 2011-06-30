@@ -1,3 +1,19 @@
+# Class: ldap::server::openldap::package::redhat
+#
+# This module manages package installation of OpenLDAP, based on 
+# operating system on RHEL based systems
+#
+# Parameters:
+#
+# There are no default parameters for this class.
+#
+# Actions:
+#
+# Requires:
+#
+# Sample Usage:
+#
+# This class file is not called directly
 class ldap::server::openldap::package::redhat {
   $redhat_packages = ['openldap', 'openldap-servers', 'openldap-clients']
   

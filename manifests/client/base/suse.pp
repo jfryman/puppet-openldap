@@ -1,3 +1,18 @@
+# Class: ldap::client::openldap::base::suse
+#
+# This class sets up default configuration for LDAP clients on SuSE systems
+#
+# Parameters:
+#
+# There are no default parameters for this class.
+#
+# Actions:
+#
+# Requires:
+#
+# Sample Usage:
+#
+# This class file is not called directly.
 class ldap::client::base::suse(
   $ensure,
   $ssl

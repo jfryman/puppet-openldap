@@ -1,3 +1,20 @@
+# Class: ldap::server::openldap
+#
+# This module manages the bootstrap of OpenLDAP Server
+# http://www.openldap.org/. Sets up the 
+# Package-File-Service design pattern.
+#
+# Parameters:
+#
+# There are no default parameters for this class.
+#
+# Actions:
+#
+# Requires:
+#
+# Sample Usage:
+#
+# This class file is not called directly.
 class ldap::server::openldap(
   $ensure = 'present'
 ) {

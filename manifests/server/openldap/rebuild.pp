@@ -1,3 +1,19 @@
+# Class: ldap::server::openldap::rebuild
+#
+# This module acts as a container that can be called externally to 
+# kick off file fragment rebuilds for OpenLDAP. 
+#
+# Parameters:
+#
+# There are no default parameters for this class.
+#
+# Actions:
+#
+# Requires:
+#
+# Sample Usage:
+#
+# This class file is not called directly
 class ldap::server::openldap::rebuild {
   exec { 'rebuild-openldap-domains.conf':
     command     => "/bin/cat ${ldap::params::lp_tmp_dir}/domains.d/* > ${ldap::params::lp_openldap_conf_dir}/domains.conf",

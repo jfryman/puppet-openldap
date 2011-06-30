@@ -1,3 +1,19 @@
+# Class: ldap::server::openldap::base
+#
+# This class sets up universal defaults between all types of 
+# Operating Systems for the Initializion of OpenLDAP.
+#
+# Parameters:
+#
+# There are no default parameters for this class.
+#
+# Actions:
+#
+# Requires:
+#
+# Sample Usage:
+#
+# This class file is not called directly.
 class ldap::server::openldap::base {
   File {
     owner => 'root',

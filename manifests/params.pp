@@ -1,3 +1,18 @@
+# Class: ldap::params
+#
+# This module manages LDAP paramaters
+#
+# Parameters:
+#
+# There are no default parameters for this class.
+#
+# Actions:
+#
+# Requires:
+#
+# Sample Usage:
+#
+# This class file is not called directly
 class ldap::params {
   ## START: Generic Setup Parameters
   $lp_daemon_user = $operatingsystem ? {

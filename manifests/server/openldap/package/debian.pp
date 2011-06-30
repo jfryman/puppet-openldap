@@ -1,3 +1,19 @@
+# Class: ldap::server::openldap::package::debian
+#
+# This module manages package installation of OpenLDAP, based on 
+# operating system on Debian based systems.
+#
+# Parameters:
+#
+# There are no default parameters for this class.
+#
+# Actions:
+#
+# Requires:
+#
+# Sample Usage:
+#
+# This class file is not called directly
 class ldap::server::openldap::package::debian {
   $debian_packages = ['slapd', 'ldap-utils', 'libperl5.10']
    
