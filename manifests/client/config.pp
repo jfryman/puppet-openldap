@@ -17,7 +17,10 @@ define ldap::client::config (
     ssl     => $ssl,
     servers => $servers,
     require => Anchor['ldap::client::config::begin'],
-    notify  => Anchor['ldap::client::config::end'],
+    notify  => [
+      Anchor['ldap::client::config::end'],
+      Class['ldap::client::service'],
+    ],
   }
 
   case $operatingsystem {

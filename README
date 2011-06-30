@@ -37,4 +37,4 @@ to automatically setup a client?
     
 Things that are needed:
   * Authenticated Bind for PAM (Want to create a user to bind as)
-  * 
+  * Break up PAM.D modules into individual templates and re-use across linux variants as appropriate. 

@@ -17,4 +17,19 @@ class ldap::client::config::debian(
     ensure  => file,
     content => template('ldap/client/common/ldap.conf.erb'), 
   }
+  file { "/etc/libnss-ldap.conf":
+    ensure  => file,
+    content => template(
+      'ldap/client/debian/pam-nss-base.conf.erb',
+      'ldap/client/debian/libnss-ldap.conf.erb'
+    ),
+  }
+  file { "/etc/pam_ldap.conf":
+    ensure  => file,
+    content => template(
+      'ldap/client/debian/pam-nss-base.conf.erb',
+      'ldap/client/debian/pam_ldap.conf.erb'
+    ),
+  }
+  
 }
