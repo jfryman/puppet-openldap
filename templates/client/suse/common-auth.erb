@@ -1,0 +1,3 @@
+auth        required      pam_env.so
+auth        sufficient    pam_unix2.so nullok try_first_pass
+<% if ensure_real == 'present' %>auth        sufficient    pam_ldap.so use_first_pass<%end%>

@@ -16,7 +16,7 @@
 class ldap::client::package::suse(
   $ensure
 ) {
-  $suse_packages = []
+  $suse_packages = ['pam_ldap', 'nss_ldap', 'openldap2-client', 'libldap']
   
   package { $suse_packages:
     ensure => $ensure,
