@@ -2,6 +2,14 @@ class ldap::client::base::suse(
   $ensure,
   $ssl
 ) {
+  File {
+    owner => 'root',
+    group => 'root',
+    mode  => '0444',
+  }
+  
+  $ensure_real = $ensure
+  
   file { '/etc/nsswitch.conf':
     ensure  => file,
     content => template('ldap/client/suse/nsswitch.conf.erb'),
