@@ -50,8 +50,7 @@ class ldap::params {
     /(?i-mx:debian|ubuntu|suse|opensuse)/ => '/var/run/slapd',
   }
   $lp_openldap_service = $operatingsystem ? {
-    /(?i-mx:fedora|rhel|centos|suse|opensuse)/ => 'ldap',
-    /(?i-mx:debian|ubuntu)/                    => 'slapd',
+    default => 'slapd',
   }
   $lp_openldap_conf_dir = $operatingsystem ? {
     /(?i-mx:fedora|rhel|centos|suse|opensuse)/ => '/etc/openldap',
