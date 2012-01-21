@@ -55,9 +55,12 @@
 #   base_dn => 'dc=puppetlabs,dc=test',
 # }
 class ldap(
-  $client = 'false',
-  $server = 'false',
-  $ssl    = 'false',
+  $client      = 'false',
+  $server      = 'false',
+  $ssl         = 'false',
+  $ssl_ca      = '',
+  $ssl_cert    = '',
+  $ssl_key     = '',
   $server_type = 'openldap'
 ) {
   include stdlib
@@ -85,6 +88,9 @@ class ldap(
     class { 'ldap::server': 
       server_type => $server_type,
       ssl         => $ssl,
+      ssl_ca      => $ssl_ca,
+      ssl_cert    => $ssl_cert,
+      ssl_key     => $ssl_key
     }
   }
 }

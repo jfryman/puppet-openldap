@@ -10,6 +10,6 @@
 #
 # Sample Usage:
 #
-
-include ldap
-
+define ldap::server::fds::define::domain () {
+  
+}

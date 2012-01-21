@@ -14,7 +14,9 @@
 # Sample Usage:
 #
 # This class file is not called directly
-class ldap::server::openldap::package::debian {
+class ldap::server::openldap::package::debian (
+    $ssl
+) {
   $debian_packages = ['slapd', 'ldap-utils', 'libperl5.10']
    
   ## Lenny auto-requires the below packages                    

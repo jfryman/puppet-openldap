@@ -30,6 +30,8 @@ Scope of initial module are the following operating systems
 TODO: Client, add SSL Support
 TODO: Client, add SASL Support
 
+Default SSL support: CERT and KEY @ /etc/ssl/{cert,key}/ldap.pem
+
 BUG: When testing by applying server-only configuration, manifest will install
 client libraries as well. Does implying server configuration mean that I want
 to automatically setup a client?

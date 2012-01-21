@@ -10,6 +10,6 @@
 #
 # Sample Usage:
 #
-
-include ldap
-
+class ldap::server::fds::service {
+  
+}

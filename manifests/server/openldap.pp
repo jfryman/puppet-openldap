@@ -16,7 +16,11 @@
 #
 # This class file is not called directly.
 class ldap::server::openldap(
-  $ensure = 'present'
+  $ensure = 'present',
+  $ssl,
+  $ssl_ca,
+  $ssl_cert,
+  $ssl_key
 ) {
   # TODO: package/config/service management.
   anchor { 'ldap::server::openldap::begin':
@@ -28,8 +32,12 @@ class ldap::server::openldap(
   }
   
   class { 'ldap::server::openldap::base':
-    require => Class['ldap::server::openldap::package'],
-    notify  => Class['ldap::server::openldap::rebuild'],
+    ssl      => $ssl,
+    ssl_ca   => $ssl_ca,
+    ssl_cert => $ssl_cert,
+    ssl_key  => $ssl_key,
+    require  => Class['ldap::server::openldap::package'],
+    notify   => Class['ldap::server::openldap::rebuild'],
   }
   
   class { 'ldap::server::openldap::rebuild':

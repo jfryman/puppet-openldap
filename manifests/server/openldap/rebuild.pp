@@ -15,22 +15,26 @@
 #
 # This class file is not called directly
 class ldap::server::openldap::rebuild {
-  exec { 'rebuild-openldap-domains.conf':
-    command     => "/bin/cat ${ldap::params::lp_tmp_dir}/domains.d/* > ${ldap::params::lp_openldap_conf_dir}/domains.conf",
+  Exec {
+    path        => '/bin:/sbin:/usr/bin:/usr/sbin',
+    group       => $ldap::params::lp_openldap_user,
     refreshonly => 'true',
-    group       => $ldap::params::lp_openldap_user,    
-    subscribe   => File["${ldap::params::lp_tmp_dir}/domains.d"],
+  }
+  
+  exec { 'rebuild-openldap-domains.conf':
+    command   => "cat ${ldap::params::lp_tmp_dir}/domains.d/* > ${ldap::params::lp_openldap_conf_dir}/domains.conf",
+    subscribe => File["${ldap::params::lp_tmp_dir}/domains.d"],
   }
   exec { 'rebuild-openldap-replication.conf':
-    command     => "/bin/cat ${ldap::params::lp_tmp_dir}/replication.d/* > ${ldap::params::lp_openldap_conf_dir}/replication.conf",
-    refreshonly => 'true',
-    group       => $ldap::params::lp_openldap_user,    
-    subscribe   => File["${ldap::params::lp_tmp_dir}/replication.d"],
+    command   => "cat ${ldap::params::lp_tmp_dir}/replication.d/* > ${ldap::params::lp_openldap_conf_dir}/replication.conf",   
+    subscribe => File["${ldap::params::lp_tmp_dir}/replication.d"],
   }
   exec { 'rebuild-openldap-schema.conf':
-    command     => "/bin/cat ${ldap::params::lp_tmp_dir}/schema.d/* > ${ldap::params::lp_openldap_conf_dir}/schema.conf",
-    refreshonly => true,
-    group       => $ldap::params::lp_openldap_user,
-    subscribe   => File["${ldap::params::lp_tmp_dir}/schema.d"],
-  }  
+    command   => "cat ${ldap::params::lp_tmp_dir}/schema.d/* > ${ldap::params::lp_openldap_conf_dir}/schema.conf",
+    subscribe => File["${ldap::params::lp_tmp_dir}/schema.d"],
+  } 
+  exec { 'rebuild-openldap-acl.conf':
+    command   => "/usr/local/bin/openldap_acl_rebuild",
+    subscribe => File["${ldap::params::lp_tmp_dir}/acl.d"],
+  }
 }

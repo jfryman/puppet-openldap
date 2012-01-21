@@ -55,6 +55,12 @@ define ldap::server::openldap::define::domain (
     notify  => Service[$ldap::params::lp_openldap_service],
   }
   
+  # Create a blank ACL file for later reference.
+  file { "${ldap::params::lp_openldap_conf_dir}/domains/${name}-acl.conf":
+    ensure  => $ensure,
+    notify  => Service[$ldap::params::lp_openldap_service],
+  }
+  
   # Create a Database Directory for the LDAP Server to live in
   file { "${ldap::params::lp_openldap_var_dir}/${name}":
     ensure  => $directory_ensure,

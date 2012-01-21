@@ -7,17 +7,18 @@ include <%= scope.lookupvar('ldap::params::lp_openldap_conf_dir') %>/schema/cosi
 include <%= scope.lookupvar('ldap::params::lp_openldap_conf_dir') %>/schema/nis.schema
 include <%= scope.lookupvar('ldap::params::lp_openldap_conf_dir') %>/schema/inetorgperson.schema
 
-
-<% # This section exists as RHEL based distros have modules compiled in %>
-<% if scope.lookupvar('ldap::params::lp_openldap_modulepath') != 'UNDEF' %>
+<%- # This section exists as RHEL based distros have modules compiled in %>
+<%- if scope.lookupvar('ldap::params::lp_openldap_modulepath') != 'UNDEF' %>
 # Module Loading
-modulepath  <%= scope.lookupvar('ldap::params::lp_openldap_modulepath') %>
+modulepath <%= scope.lookupvar('ldap::params::lp_openldap_modulepath') %>
 
-<% if scope.lookupvar('ldap::params::lp_openldap_db_type') == 'hdb' %>
-moduleload  back_hdb<% end %>
-<% if scope.lookupvar('ldap::params::lp_openldap_db_type') == 'bdb' %>
-moduleload  back_bdb<% end %>
-<% end %>
+  <%- if scope.lookupvar('ldap::params::lp_openldap_db_type') == 'hdb' %>
+moduleload  back_hdb
+  <%- end %>
+  <%- if scope.lookupvar('ldap::params::lp_openldap_db_type') == 'bdb' %>
+moduleload  back_bdb
+  <%- end %>
+<%- end %>
 
 pidfile		<%= scope.lookupvar('ldap::params::lp_openldap_run_dir') %>/slapd.pid
 argsfile	<%= scope.lookupvar('ldap::params::lp_openldap_run_dir') %>/slapd.args
@@ -35,10 +36,12 @@ include <%= scope.lookupvar('ldap::params::lp_openldap_conf_dir') %>/replication
 # Include all extra configured schema types configured on this host
 include <%= scope.lookupvar('ldap::params::lp_openldap_conf_dir') %>/schema.conf
 
-# TODO: Add SSL Support
-# TLSCACertificateFile /etc/pki/tls/certs/ca-bundle.crt
-# TLSCertificateFile /etc/pki/tls/certs/slapd.pem
-# TLSCertificateKeyFile /etc/pki/tls/certs/slapd.pem
+<%- if ssl == 'true' %>
+TLSCACertificateFile <%= ssl_ca %>
+TLSCertificateFile <%= ssl_cert %>
+TLSCertificateKeyFile <%= ssl_key %>
+<%- end %>
 
-
-<% if scope.lookupvar('ldap::params::lp_openldap_allow_ldapv2') == 'true' %>allow bind_v2<% end %>
+<%- if scope.lookupvar('ldap::params::lp_openldap_allow_ldapv2') == 'true' %>
+allow bind_v2
+<%- end %>

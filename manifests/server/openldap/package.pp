@@ -24,9 +24,11 @@ class ldap::server::openldap::package {
     require => Anchor['ldap::server::openldap::package::begin'],
     before  => Anchor['ldap::server::openldap::package::end'],
   }
-  
+
+  class { 'ldap::server::openldap::package::common': }
+
   case $operatingsystem {
-    centos,fedora,rhel: {
+    centos,fedora,redhat: {
       class { 'ldap::server::openldap::package::redhat': }
     }
     debian,ubuntu: {

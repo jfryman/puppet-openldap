@@ -1,0 +1,741 @@
+# 1.3.6.1.4.1.32372                 <- websages
+# 1.3.6.1.4.1.32372.1               <-   websages.1:
+# 1.3.6.1.4.1.32372.1.1             <-     Version 1: 
+
+# 1.3.6.1.4.1.32372.1.1.1           <- LDAP:
+# 1.3.6.1.4.1.32372.1.1.1.1         <-   Revision 1:
+# 1.3.6.1.4.1.32372.1.1.1.1.1       <-     Configuration Items:
+# 1.3.6.1.4.1.32372.1.1.1.1.1.1     <-       Configuration Attributes:
+# 1.3.6.1.4.1.32372.1.1.1.1.1.1.1   <-         - gatewayIpNumber
+# 1.3.6.1.4.1.32372.1.1.1.1.1.1.2   <-         - configBase
+# 1.3.6.1.4.1.32372.1.1.1.1.1.1.3   <-         - configSet
+# 1.3.6.1.4.1.32372.1.1.1.1.1.2     <-       Configuration ObjectClasses:
+# 1.3.6.1.4.1.32372.1.1.1.1.1.2.1   <-         - ipSubnet
+# 1.3.6.1.4.1.32372.1.1.1.1.1.2.2   <-         - configHost
+# 1.3.6.1.4.1.32372.1.1.1.1.2       <-     State Tracking Items:
+# 1.3.6.1.4.1.32372.1.1.1.1.2.1     <-       State Tracking Attributes:
+# 1.3.6.1.4.1.32372.1.1.1.1.2.1.1   <-         - snmpEnabled
+# 1.3.6.1.4.1.32372.1.1.1.1.2.1.2   <-         - hostFirewallActive
+# 1.3.6.1.4.1.32372.1.1.1.1.2.1.3   <-         - icmpEchoEnabled
+# 1.3.6.1.4.1.32372.1.1.1.1.3       <-     Pfacter Items:
+# 1.3.6.1.4.1.32372.1.1.1.1.3.1     <-       Pfacter Tracking Attributes:
+# 1.3.6.1.4.1.32372.1.1.1.1.3.1.1   <-         - uniqueId
+# 1.3.6.1.4.1.32372.1.1.1.1.3.1.2   <-         - hostname
+# 1.3.6.1.4.1.32372.1.1.1.1.3.1.3   <-         - domain
+# 1.3.6.1.4.1.32372.1.1.1.1.3.1.4   <-         - fqdn
+# 1.3.6.1.4.1.32372.1.1.1.1.3.1.5   <-         - ipAddress
+# 1.3.6.1.4.1.32372.1.1.1.1.3.1.6   <-         - hardwareManufacturer
+# 1.3.6.1.4.1.32372.1.1.1.1.3.1.7   <-         - hardwareProduct
+# 1.3.6.1.4.1.32372.1.1.1.1.3.1.8   <-         - hardwareModel
+# 1.3.6.1.4.1.32372.1.1.1.1.3.1.9   <-         - hardwarePlatform
+# 1.3.6.1.4.1.32372.1.1.1.1.3.1.10  <-         - architecture
+# 1.3.6.1.4.1.32372.1.1.1.1.3.1.11  <-         - lsbId
+# 1.3.6.1.4.1.32372.1.1.1.1.3.1.12  <-         - lsbRelease
+# 1.3.6.1.4.1.32372.1.1.1.1.3.1.13  <-         - lsbDescription
+# 1.3.6.1.4.1.32372.1.1.1.1.3.1.14  <-         - operatingSystem
+# 1.3.6.1.4.1.32372.1.1.1.1.3.1.15  <-         - kernelRelease
+# 1.3.6.1.4.1.32372.1.1.1.1.3.1.16  <-         - kernelVersion
+# 1.3.6.1.4.1.32372.1.1.1.1.3.1.17  <-         - kernel
+# 1.3.6.1.4.1.32372.1.1.1.1.3.1.18  <-         - processor
+# 1.3.6.1.4.1.32372.1.1.1.1.3.1.19  <-         - processorCount
+# 1.3.6.1.4.1.32372.1.1.1.1.3.1.20  <-         - disk
+# 1.3.6.1.4.1.32372.1.1.1.1.3.1.21  <-         - memory
+# 1.3.6.1.4.1.32372.1.1.1.1.3.1.22  <-         - memoryTotal
+# 1.3.6.1.4.1.32372.1.1.1.1.3.1.23  <-         - localtime
+# 1.3.6.1.4.1.32372.1.1.1.1.3.2     <-       Pfacter Tracking ObjectClasses:
+# 1.3.6.1.4.1.32372.1.1.1.1.3.2.1   <-         - pfHost
+# 1.3.6.1.4.1.32372.1.1.1.1.4       <-       Websages User
+# 1.3.6.1.4.1.32372.1.1.1.1.4.1     <-       Websages User Attributes
+# 1.3.6.1.4.1.32372.1.1.1.1.4.1.1   <-         - pagerEmail
+# 1.3.6.1.4.1.32372.1.1.1.1.4.2     <-       Websages User ObjectClasses
+# 1.3.6.1.4.1.32372.1.1.1.1.4.2.1   <-         - websage
+# 1.3.6.1.4.1.32372.1.1.1.1.5       <-     Facter Items
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1     <-       Facter Tracking Attributes:
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.1     <-         factArchitecture
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.2     <-         factDomain
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.3     <-         factFacterVersion
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.4     <-         factFqdn
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.5     <-         factHardwareisa
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.6     <-         factHardwareModel
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.7     <-         factHostname
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.8     <-         factId
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.9     <-         factInterface
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.10     <-         factIpAddress
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.11     <-         factIsVirtual
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.12     <-         factKernel
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.13     <-         factKernelMajVersion
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.14     <-         factKernelRelease
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.15     <-         factKernelVersion
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.16     <-         factLsbDistCodename
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.17     <-         factLsbDistDescription
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.18     <-         factLsbDistId
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.19     <-         factLsbDistRelease
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.20     <-         factLsbMajDistRelease
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.21     <-         factLsbRelease
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.22     <-         factMacAddress
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.23     <-         factMemoryFree
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.24     <-         factMemorySize
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.25     <-         factNetwork
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.26     <-         factOperatingSystem
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.27     <-         factOperatingSystemRelease
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.28     <-         factPath
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.29     <-         factPhysicalProcessorCount
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.30     <-         factProcessorId
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.31     <-         factProcessorInfo
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.32     <-         factProcessorCount
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.33     <-         factPs
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.34     <-         factPuppetVersion
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.35     <-         factRubySiteDir
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.36     <-         factRubyVersion
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.37     <-         factSelinux
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.38     <-         factSelinuxConfigMode
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.39     <-         factSelinuxConfigPolicy
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.40     <-         factSelinuxCurrentMode
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.41     <-         factSelinuxEnforced
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.42     <-         factSelinuxMode
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.43     <-         factSelinuxPolicyVersion
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.44     <-         factSshDsaKey
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.45     <-         factSshRsaKey
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.46     <-         factSwapFree
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.47     <-         factSwapSize
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.48     <-         factTimeZone
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.49     <-         factUniqueId
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.50     <-         factUptime
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.51     <-         factUptimeDays
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.52     <-         factUptimeHours
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.53     <-         factUptimeSeconds
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.54     <-         factVirtual
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.55     <-         factNetmask
+# 1.3.6.1.4.1.32372.1.1.1.1.5.1.56     <-         factLastUpdated
+# 1.3.6.1.3.1.32372.1.1.1.1.5.2     <-       Facter Tracking ObjectClasses:
+# 1.3.6.1.3.1.32372.1.1.1.1.5.2.1   <-         facterHost
+# 1.3.6.1.3.1.32372.1.1.1.1.5.2.2   <-         facterNetwork
+# 1.3.6.1.3.1.32372.1.1.1.1.5.2.3   <-         facterProcessor
+# 1.3.6.1.3.1.32372.1.1.1.1.5.2.4   <-         Custom Fact objectClasses:
+# 1.3.6.1.3.1.32372.1.1.1.1.5.2.4.1 <-           facterGenericCustomFacts
+# 1.3.6.1.3.1.32372.1.1.1.1.5.3.4.2 <-           facterMckessonCustomFacts
+# 1.3.6.1.3.1.32372.1.1.1.1.5.3     <-       Custom Facts
+# 1.3.6.1.3.1.32372.1.1.1.1.5.3.1   <-         Generic Custom Facts
+# 1.3.6.1.3.1.32372.1.1.1.1.5.3.1.1 <-           factJavaVersion
+# 1.3.6.1.3.1.32372.1.1.1.1.5.3.1.2 <-           factRhnRegistered
+# 1.3.6.1.3.1.32372.1.1.1.1.5.3.2   <-         McKesson
+# 1.3.6.1.3.1.32372.1.1.1.1.5.3.2.1 <-            factMckessonVersion
+
+
+################## AttributeTypes ################## 
+
+# STATE
+
+attributetype ( 1.3.6.1.4.1.32372.1.1.1.1.1.1.2 NAME 'configBase'  
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+    SINGLE-VALUE 
+    )
+attributetype ( 1.3.6.1.4.1.32372.1.1.1.1.1.1.3 NAME 'configSet'  
+    DESC 'A single configuration set/class/whatever this host belongs to'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+    ) 
+
+attributetype ( 1.3.6.1.4.1.32372.1.1.1.1.1.1.1 NAME 'gatewayIpNumber'
+    DESC 'The entry and exit point(s) for an ipSubnetGateway'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    )
+
+attributetype ( 1.3.6.1.4.1.32372.1.1.1.1.2.1.1 NAME 'snmpEnabled'
+    DESC 'SNMP has been enabled on this system'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+    )
+
+attributetype ( 1.3.6.1.4.1.32372.1.1.1.1.2.1.2 NAME 'hostFirewallActive'
+    DESC 'The host-based firewall is Active'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+    )
+
+attributetype ( 1.3.6.1.4.1.32372.1.1.1.1.2.1.3 NAME 'icmpEchoEnabled'
+    DESC 'The host is configured to respond to ICMP Echo Requests'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+    )
+
+# PFACTER
+
+#attributetype ( 1.3.6.1.4.1.4203.1.3.5 NAME 'supportedFeatures' 
+#    DESC 'features supported by the server' EQUALITY objectIdentifierMatch 
+#    SYNTAX 1.3.6.1.4.1.1466.115.121.1.38 
+#    X-ORIGIN 'user defined' 
+#    )
+
+attributetype ( 1.3.6.1.4.1.32372.1.1.1.1.3.1.1 NAME 'uniqueId'  
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+    SINGLE-VALUE 
+    X-ORIGIN 'user defined' 
+    )
+
+attributetype ( 1.3.6.1.4.1.32372.1.1.1.1.3.1.2 NAME 'hostname'  
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+    SINGLE-VALUE 
+    X-ORIGIN 'user defined' 
+    )
+
+attributetype ( 1.3.6.1.4.1.32372.1.1.1.1.3.1.3 NAME 'domain'  
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+    SINGLE-VALUE 
+    X-ORIGIN 'user defined' 
+    )
+
+attributetype ( 1.3.6.1.4.1.32372.1.1.1.1.3.1.4 NAME 'fqdn'  
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+    SINGLE-VALUE 
+    X-ORIGIN 'user defined' 
+    )
+
+attributetype ( 1.3.6.1.4.1.32372.1.1.1.1.3.1.5 NAME 'ipAddress'  
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+    X-ORIGIN 'user defined' 
+    )
+
+attributetype ( 1.3.6.1.4.1.32372.1.1.1.1.3.1.6 NAME 'hardwareManufacturer'  
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+    SINGLE-VALUE 
+    X-ORIGIN 'user defined' 
+    )
+
+attributetype ( 1.3.6.1.4.1.32372.1.1.1.1.3.1.7 NAME 'hardwareProduct'  
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+    SINGLE-VALUE 
+    X-ORIGIN 'user defined' 
+    )
+
+attributetype ( 1.3.6.1.4.1.32372.1.1.1.1.3.1.8 NAME 'hardwareModel'  
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+    SINGLE-VALUE 
+    X-ORIGIN 'user defined' 
+    )
+
+attributetype ( 1.3.6.1.4.1.32372.1.1.1.1.3.1.9 NAME 'hardwarePlatform'  
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+    SINGLE-VALUE 
+    X-ORIGIN 'user defined' 
+    )
+
+attributetype ( 1.3.6.1.4.1.32372.1.1.1.1.3.1.10 NAME 'architecture'  
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+    SINGLE-VALUE 
+    X-ORIGIN 'user defined' 
+    )
+
+attributetype ( 1.3.6.1.4.1.32372.1.1.1.1.3.1.11 NAME 'lsbId'  
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+    SINGLE-VALUE 
+    X-ORIGIN 'user defined' 
+    )
+
+attributetype ( 1.3.6.1.4.1.32372.1.1.1.1.3.1.12 NAME 'lsbRelease'  
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+    SINGLE-VALUE 
+    X-ORIGIN 'user defined' 
+    )
+
+attributetype ( 1.3.6.1.4.1.32372.1.1.1.1.3.1.13 NAME 'lsbDescription'  
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+    SINGLE-VALUE 
+    X-ORIGIN 'user defined' 
+    )
+
+attributetype ( 1.3.6.1.4.1.32372.1.1.1.1.3.1.14 NAME 'operatingSystem'  
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+    SINGLE-VALUE 
+    X-ORIGIN 'user defined' 
+    )
+
+attributetype ( 1.3.6.1.4.1.32372.1.1.1.1.3.1.15 NAME 'kernelRelease'  
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+    SINGLE-VALUE 
+    X-ORIGIN 'user defined' 
+    )
+
+attributetype ( 1.3.6.1.4.1.32372.1.1.1.1.3.1.16 NAME 'kernelVersion'  
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+    SINGLE-VALUE 
+    X-ORIGIN 'user defined' 
+    )
+
+attributetype ( 1.3.6.1.4.1.32372.1.1.1.1.3.1.17 NAME 'kernel'  
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+    SINGLE-VALUE 
+    X-ORIGIN 'user defined' 
+    )
+
+attributetype ( 1.3.6.1.4.1.32372.1.1.1.1.3.1.18 NAME 'processor'  
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+    X-ORIGIN 'user defined' 
+    )
+
+attributetype ( 1.3.6.1.4.1.32372.1.1.1.1.3.1.19 NAME 'processorCount'  
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.27 
+    SINGLE-VALUE 
+    X-ORIGIN 'user defined' 
+    )
+
+attributetype ( 1.3.6.1.4.1.32372.1.1.1.1.3.1.20 NAME 'disk'  
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+    X-ORIGIN 'user defined' 
+    )
+
+attributetype ( 1.3.6.1.4.1.32372.1.1.1.1.3.1.21 NAME 'memory'  
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+    X-ORIGIN 'user defined' 
+    )
+
+attributetype ( 1.3.6.1.4.1.32372.1.1.1.1.3.1.22 NAME 'memoryTotal'  
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+    SINGLE-VALUE 
+    X-ORIGIN 'user defined' 
+    )
+
+attributetype ( 1.3.6.1.4.1.32372.1.1.1.1.3.1.23 NAME 'localtime'  
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+    SINGLE-VALUE 
+    X-ORIGIN 'user defined' 
+    )
+
+################## Facter Items  ##################
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.1 NAME 'factArchitecture'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.2 NAME 'factDomain'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.3 NAME 'factFacterVersion'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.4 NAME 'factFqdn'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.5 NAME 'factHardwareisa'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.6 NAME 'factHardwareModel'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.7 NAME 'factHostname'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.8 NAME 'factId'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.9 NAME 'factInterface'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.10 NAME 'factIpAddress'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.11 NAME 'factIsVirtual'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.12 NAME 'factKernel'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.13 NAME 'factKernelMajVersion'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.14 NAME 'factKernelRelease'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.15 NAME 'factKernelVersion'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.16 NAME 'factLsbDistCodename'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.17 NAME 'factLsbDistDescription'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.18 NAME 'factLsbDistId'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.19 NAME 'factLsbDistRelease'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.20 NAME 'factLsbMajDistRelease'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.21 NAME 'factLsbRelease'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.22 NAME 'factMacAddress'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.23 NAME 'factMemoryFree'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.24 NAME 'factMemorySize'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.25 NAME 'factNetwork'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.26 NAME 'factOperatingSystem'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.27 NAME 'factOperatingSystemRelease'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.28 NAME 'factPath'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.29 NAME 'factPhysicalProcessorCount'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.30 NAME 'factProcessorId'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.31 NAME 'factProcessorInfo'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.32 NAME 'factProcessorCount'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.33 NAME 'factPs'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.34 NAME 'factPuppetVersion'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.35 NAME 'factRubySiteDir'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.36 NAME 'factRubyVersion'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.37 NAME 'factSelinux'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.38 NAME 'factSelinuxConfigMode'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.39 NAME 'factSelinuxConfigPolicy'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.40 NAME 'factSelinuxCurrentMode'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.41 NAME 'factSelinuxEnforced'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.42 NAME 'factSelinuxMode'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.43 NAME 'factSelinuxPolicyVersion'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.44 NAME 'factSshDsaKey'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.45 NAME 'factSshRsaKey'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.46 NAME 'factSwapFree'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.47 NAME 'factSwapSize'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.48 NAME 'factTimeZone'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.49 NAME 'factUniqueId'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.50 NAME 'factUptime'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.51 NAME 'factUptimeDays'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.52 NAME 'factUptimeHours'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.53 NAME 'factUptimeSeconds'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.54 NAME 'factVirtual'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.55 NAME 'factNetmask'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.1.56 NAME 'factLastUpdated'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+
+################## Custom Facts  ##################
+################## Generic Custom Facts  ##################
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.3.1.1 NAME 'factJavaVersion'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.3.1.2 NAME 'factRhnRegistered'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+
+################## McKesson Custom Facts  ##################    
+attributetype ( 1.3.6.1.3.1.32372.1.1.1.1.5.3.2.1 NAME 'factMckessonVersion'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    SINGLE-VALUE
+    X-ORIGIN 'user defined'
+    )
+    
+################## ObjectClasses ##################
+objectClass ( 1.3.6.1.4.1.32372.1.1.1.1.1.2.1 NAME 'ipSubnet'
+    SUP top
+    AUXILIARY
+    DESC 'An IP Subnet'
+    MUST ( ipHostNumber $ ipNetmaskNumber $ cn )
+    MAY ( manager $ description $ l $ gatewayIpNumber )
+    )
+
+objectClass ( 1.3.6.1.4.1.32372.1.1.1.1.1.2.2 NAME 'configHost'
+    SUP top
+    AUXILIARY
+    MUST ( configBase $ configSet )
+    MAY  ( snmpEnabled $ hostFirewallActive $ icmpEchoEnabled )
+    )
+
+attributetype ( 1.3.6.1.4.1.32372.1.1.1.1.4.1.1 NAME 'pagerEmail'  
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+    EQUALITY caseExactIA5Match
+    X-ORIGIN 'user defined' 
+    )
+
+objectClass ( 1.3.6.1.4.1.32372.1.1.1.1.3.2.1 NAME 'pfHost' 
+    SUP top 
+    STRUCTURAL 
+    MAY ( architecture $ disk $ domain $ fqdn $ hardwareManufacturer $ hardwareModel $ hardwarePlatform $ hardwareProduct $ hostname $ ipAddress $ kernel $ kernelRelease $ kernelVersion $ localtime $ lsbDescription $ lsbId $ lsbRelease $ macAddress $ memory $ memoryTotal $ operatingSystem $ processor $ processorCount $ uniqueId ) 
+    X-ORIGIN 'user defined' 
+    )
+    
+objectClass ( 1.3.6.1.3.1.32372.1.1.1.1.5.2.1  NAME 'facterHost'
+    SUP device
+    STRUCTURAL
+    MUST ( cn )
+    MAY ( ou $ o $ factArchitecture $ factDomain $ factFacterVersion $ factFqdn $ factHardwareisa $ factHardwareModel $ factHostname $ factId $ factIsVirtual $ factKernel $ factKernelMajVersion $ factKernelRelease $ factKernelVersion $ factLsbDistCodename $ factLsbDistDescription $ factLsbDistId $ factLsbDistRelease $ factLsbMajDistRelease $ factLsbRelease $ factMacAddress $ factMemoryFree $ factMemorySize $ factOperatingSystem $ factOperatingSystemRelease $ factPath $ factPhysicalProcessorCount $ factProcessorCount $ factPs $ factPuppetVersion $ factRubySiteDir $ factRubyVersion $ factSelinux $ factSelinuxConfigMode $ factSelinuxConfigPolicy $ factSelinuxCurrentMode $ factSelinuxEnforced $ factSelinuxMode $ factSelinuxPolicyVersion $ factSshDsaKey $ factSshRsaKey $ factSwapFree $ factSwapSize $ factTimeZone $ factUniqueId $ factUptime $ factUptimeDays $ factUptimeHours $ factUptimeSeconds $ factVirtual $ factLastUpdated )
+    X-ORIGIN 'user defined'
+    )
+    
+objectClass ( 1.3.6.1.3.1.32372.1.1.1.1.5.2.2  NAME 'facterNetwork'
+    SUP device
+    STRUCTURAL
+    MUST ( cn )
+    MAY ( factInterface $ factIpAddress $ factMacAddress $ factNetwork $ factNetmask )
+    X-ORIGIN 'user defined'
+    )
+    
+objectClass ( 1.3.6.1.3.1.32372.1.1.1.1.5.2.3  NAME 'facterProcessor'
+    SUP device
+    STRUCTURAL
+    MUST ( cn )
+    MAY ( factProcessorId $ factProcessorInfo )
+    X-ORIGIN 'user defined'
+    )
+
+objectClass ( 1.3.6.1.4.1.32372.1.1.1.1.4.2.1 NAME 'websage' 
+    SUP top 
+    AUXILIARY
+    MAY ( pagerEmail ) 
+    X-ORIGIN 'user defined' 
+    )
+
+################## CustomObjectClasses ##################
+################## FacterGenericObjectClasses ##################
+objectClass ( 1.3.6.1.3.1.32372.1.1.1.1.5.2.4.1  NAME 'facterGenericCustomFacts'
+    SUP facterHost
+    STRUCTURAL
+    MAY ( factJavaVersion )
+    X-ORIGIN 'user defined'
+    )
+
+################## FacterMckessonObjectClasses ##################
+objectClass ( 1.3.6.1.3.1.32372.1.1.1.1.5.2.4.2  NAME 'facterMckessonCustomFacts'
+    SUP facterHost
+    STRUCTURAL
+    MAY ( factMckessonVersion )
+    X-ORIGIN 'user defined'
+    ) 
+
+
+
+# 1.3.6.1.4.1.32372.1.1.2         <- SNMP:
+# 1.3.6.1.4.1.32372.1.1.2.1       <-   Revision 1:
+# 1.3.6.1.4.1.32372.1.1.2.1.1     <-   Poll OIDs:
+# 1.3.6.1.4.1.32372.1.1.2.1.2     <-   Trap OIDs:

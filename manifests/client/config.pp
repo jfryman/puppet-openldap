@@ -51,7 +51,7 @@ define ldap::client::config (
   }
 
   case $operatingsystem {
-    centos,fedora,rhel: {
+    centos,fedora,redhat: {
       class { 'ldap::client::config::redhat': }
     }
     debian,ubuntu: {

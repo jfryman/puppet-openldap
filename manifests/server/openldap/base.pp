@@ -14,7 +14,12 @@
 # Sample Usage:
 #
 # This class file is not called directly.
-class ldap::server::openldap::base {
+class ldap::server::openldap::base(
+  $ssl,
+  $ssl_ca,
+  $ssl_cert,
+  $ssl_key
+) {
   File {
     owner => 'root',
     group => $ldap::params::lp_daemon_group,
@@ -62,6 +67,11 @@ class ldap::server::openldap::base {
     purge   => true,
     recurse => true,
   }
+  file { "${ldap::params::lp_tmp_dir}/acl.d":
+    ensure  => directory,
+    purge   => true,
+    recurse => true,
+  }
   file {"${ldap::params::lp_openldap_conf_dir}/slapd.d":
     ensure => 'absent',
     force  => 'true',
@@ -90,7 +100,17 @@ class ldap::server::openldap::base {
   file { "${ldap::params::lp_tmp_dir}/schema.d/00_default":
     ensure => file,
   }
-
+  file { "${ldap::params::lp_openldap_conf_dir}/acl.conf":
+    ensure => file,
+    group  => $ldap::params::lp_daemon_group,
+  }
+  
+  file { '/usr/local/bin/openldap_acl_rebuild':
+    ensure  => file,
+    mode    => '0700',
+    content => template('ldap/server/openldap/openldap_acl_rebuild.erb'),
+  }
+  
   file {"${ldap::params::lp_openldap_conf_dir}":
     ensure => directory,
     mode   => '0755',

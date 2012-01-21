@@ -29,7 +29,7 @@ class ldap::client::package(
   }
 
   case $operatingsystem {
-    centos,fedora,rhel: {
+    centos,fedora,redhat: {
       class { 'ldap::client::package::redhat': }
     }
     debian,ubuntu: {

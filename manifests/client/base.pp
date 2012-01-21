@@ -31,7 +31,7 @@ class ldap::client::base(
   }
 
   case $operatingsystem {
-    centos,fedora,rhel: {
+    centos,fedora,redhat: {
       class { 'ldap::client::base::redhat': }
     }
     debian,ubuntu: {
