@@ -14,7 +14,9 @@
 # Sample Usage:
 #
 # This class file is not called directly
-class ldap::server::openldap::package {
+class ldap::server::openldap::package(
+  $ssl
+) {
 
   # Utilize the Anchor Pattern
   anchor { 'ldap::server::openldap::package::begin': }
@@ -32,7 +34,9 @@ class ldap::server::openldap::package {
       class { 'ldap::server::openldap::package::redhat': }
     }
     debian,ubuntu: {
-      class { 'ldap::server::openldap::package::debian': }
+      class { 'ldap::server::openldap::package::debian': 
+         ssl => $ssl,
+      }
     }
     opensuse,suse: {
       class { 'ldap::server::openldap::package::suse': }

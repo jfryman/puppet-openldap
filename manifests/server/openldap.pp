@@ -27,7 +27,8 @@ class ldap::server::openldap(
     before => Class['ldap::server::openldap::package'],
   }
   
-  class { 'ldap::server::openldap::package': 
+  class { 'ldap::server::openldap::package':
+    ssl    => $ssl,
     notify => Class['ldap::server::openldap::service'],
   }
   
