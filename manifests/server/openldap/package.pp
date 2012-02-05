@@ -17,34 +17,39 @@
 class ldap::server::openldap::package(
   $ssl
 ) {
-
-  # Utilize the Anchor Pattern
-  anchor { 'ldap::server::openldap::package::begin': }
-  anchor { 'ldap::server::openldap::package::end': }
   
-  Class {
-    require => Anchor['ldap::server::openldap::package::begin'],
-    before  => Anchor['ldap::server::openldap::package::end'],
+  # Manage the User and Group
+  user { $ldap::params::lp_daemon_user:
+    ensure  => 'present',
+    uid     => $ldap::params::lp_daemon_uid,
+    gid     => $ldap::params::lp_daemon_gid,
+    comment => 'LDAP User',
+    home    => $ldap::params::lp_openldap_var_dir,
+    shell   => '/bin/false',
+    before  => Package[$ldap::params::openldap_packages],
   }
-
-  class { 'ldap::server::openldap::package::common': }
-
-  case $operatingsystem {
-    centos,fedora,redhat: {
-      class { 'ldap::server::openldap::package::redhat': 
-        require +> Class['ldap::server::openldap::package::common'],
-      }
-    }
-    debian,ubuntu: {
-      class { 'ldap::server::openldap::package::debian': 
-         ssl => $ssl,
-         require +> Class['ldap::server::openldap::package::common'],
-      }
-    }
-    opensuse,suse: {
-      class { 'ldap::server::openldap::package::suse': 
-        require +> Class['ldap::server::openldap::package::common'],
-      }
+  group { $ldap::params::lp_daemon_user:
+    ensure => 'present',
+    gid    => $ldap::params::lp_daemon_gid,
+    before  => Package[$ldap::params::openldap_packages],
+  }
+  
+  package { $ldap::params::openldap_packages: 
+    ensure => present,
+  }
+  
+  ## This section modifies the /etc/default file to allow for
+  ## slapd.conf configuration as opposed to the cn=config 
+  ## configuration and setup. This section will be removed once
+  ## configuration is migrated to cn=config
+  if $operatingsystem == 'Ubuntu' {
+    file {'/etc/default/slapd':
+      ensure  => file,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0644',
+      content => template('ldap/server/openldap/slapd_default.erb'),
+      require => Package[$debian_packages],
     }
   }
 }

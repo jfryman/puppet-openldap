@@ -27,6 +27,15 @@ class ldap::params {
       $lp_openldap_conf_dir = '/etc/ldap'
       $lp_openldap_var_dir = '/var/lib/slapd'
       $lp_openldap_modulepath = '/usr/lib/ldap'
+      
+      if $lsbdistcodename == 'lenny' {
+        $openldap_packages = ['odbcinst1debian1', 'unixodbc', 'psmisc',
+                             'libsasl2-modules', 'libslp1', 'libltdl3', 
+                             'libdb4.2', 
+                             ]
+      } else {
+        $openldap_packages = ['slapd', 'ldap-utils', 'libperl5.10']
+      }
     }
     fedora,redhat,centos,suse,opensuse: {
       $lp_daemon_user = 'ldap'
@@ -39,6 +48,13 @@ class ldap::params {
       $lp_openldap_conf_dir = '/etc/openldap'
       $lp_openldap_var_dir = '/var/lib/ldap'
       $lp_openldap_modulepath = 'UNDEF'
+      
+      if $operatingsystem ~= /.*suse$/ {
+        $openldap_packages = ['openldap2', 'libltdl7', 'openldap2-back-meta']
+      } else {
+        # Default case for Red Hat
+        $openldap_packages = ['openldap', 'openldap-servers', 'openldap-clients']
+      }
     }
   }
   
