@@ -31,15 +31,20 @@ class ldap::server::openldap::package(
 
   case $operatingsystem {
     centos,fedora,redhat: {
-      class { 'ldap::server::openldap::package::redhat': }
+      class { 'ldap::server::openldap::package::redhat': 
+        require +> Class['ldap::server::openldap::package::common'],
+      }
     }
     debian,ubuntu: {
       class { 'ldap::server::openldap::package::debian': 
          ssl => $ssl,
+         require +> Class['ldap::server::openldap::package::common'],
       }
     }
     opensuse,suse: {
-      class { 'ldap::server::openldap::package::suse': }
+      class { 'ldap::server::openldap::package::suse': 
+        require +> Class['ldap::server::openldap::package::common'],
+      }
     }
   }
 }
