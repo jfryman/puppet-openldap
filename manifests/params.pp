@@ -15,7 +15,7 @@
 # This class file is not called directly
 class ldap::params {
 
-  case $operatingsystem { 
+  case $::operatingsystem {
     ubuntu,debian: {
       $lp_daemon_user = 'openldap'
       $lp_daemon_group = 'openldap'
@@ -25,16 +25,31 @@ class ldap::params {
       $lp_openldap_run_dir = '/var/run/slapd'
       $lp_openldap_service = 'slapd'
       $lp_openldap_conf_dir = '/etc/ldap'
-      $lp_openldap_var_dir = '/var/lib/slapd'
       $lp_openldap_modulepath = '/usr/lib/ldap'
 
-      if $lsbdistcodename == 'lenny' {
-        $openldap_packages = ['odbcinst1debian1', 'unixodbc', 'psmisc',
-                             'libsasl2-modules', 'libslp1', 'libltdl3', 
-                             'libdb4.2',
-                             ]
-      } else {
-        $openldap_packages = ['slapd', 'ldap-utils', 'libperl5.10']
+      # Special configuration for Ubuntu and var_dir. 
+      # Ubuntu has AppArmor installed by default, which 
+      # fails for any directories located in /var/lib/slapd (debian default)
+      # https://bugs.launchpad.net/ubuntu/+source/openldap/+bug/286614
+      case $::operatingsystem {
+        ubuntu: {
+          $lp_openldap_var_dir = '/var/lib/ldap'
+        }
+        default: {
+          $lp_openldap_var_dir = '/var/lib/slapd'
+        }
+      }
+
+      case $::lsbdistcodename {
+        lenny: {
+          $openldap_packages = ['odbcinst1debian1', 'unixodbc', 'psmisc',
+                               'libsasl2-modules', 'libslp1', 'libltdl3', 
+                               'libdb4.2',
+                               ]
+        }
+        default: {
+          $openldap_packages = ['slapd', 'ldap-utils', 'libperl5.10']
+        }
       }
     }
     fedora,redhat,centos,suse,opensuse: {
