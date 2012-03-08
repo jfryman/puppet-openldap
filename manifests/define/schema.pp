@@ -27,13 +27,22 @@ define ldap::define::schema(
   $ensure = 'present',
   $source
 ){
-  # TODO: Add regex validation checks for facts. 
+  File {
+    owner   => 'root',
+    group   => $ldap::params::lp_daemon_group,
+    before  => Class['ldap::server::rebuild'],
+    require => Class['ldap::server::config'],
+  }
   
-  # determine server type based on fact. 
-  # TODO: How can I automatically select the type?
-  # Custom fact only is populated on the second run.
-    ldap::server::openldap::define::schema { $name:
-      ensure => $ensure,
-      source => $source
-    } 
+  file { "${ldap::params::lp_tmp_dir}/schema.d/${name}.schema":
+    ensure  => $ensure,
+    content => "include ${ldap::params::lp_openldap_conf_dir}/schema/${name}.schema\n",
+    notify  => Class['ldap::server::rebuild'],
+  }
+  
+  file { "${ldap::params::lp_openldap_conf_dir}/schema/${name}.schema":
+    ensure => $ensure,
+    source => $source,
+    notify => Class['ldap::server::service'],
+  }
 }
