@@ -27,11 +27,11 @@ class ldap::params {
       $lp_openldap_conf_dir = '/etc/ldap'
       $lp_openldap_var_dir = '/var/lib/slapd'
       $lp_openldap_modulepath = '/usr/lib/ldap'
-      
+
       if $lsbdistcodename == 'lenny' {
         $openldap_packages = ['odbcinst1debian1', 'unixodbc', 'psmisc',
                              'libsasl2-modules', 'libslp1', 'libltdl3', 
-                             'libdb4.2', 
+                             'libdb4.2',
                              ]
       } else {
         $openldap_packages = ['slapd', 'ldap-utils', 'libperl5.10']
@@ -48,22 +48,22 @@ class ldap::params {
       $lp_openldap_conf_dir = '/etc/openldap'
       $lp_openldap_var_dir = '/var/lib/ldap'
       $lp_openldap_modulepath = 'UNDEF'
-      
-      if $operatingsystem ~= /.*suse$/ {
-        $openldap_packages = ['openldap2', 'libltdl7', 'openldap2-back-meta']
-      } else {
-        # Default case for Red Hat
-        $openldap_packages = ['openldap', 'openldap-servers', 'openldap-clients']
+
+      case $::operatingsystem {
+        suse: {
+          $openldap_packages = ['openldap2', 'libltdl7', 'openldap2-back-meta']
+        }
+        default: {
+          # Default case is RHEL
+          $openldap_packages = ['openldap', 'openldap-servers', 'openldap-clients']
+        }
       }
     }
   }
-  
   $lp_tmp_dir = '/tmp/openldap'
-  
   $lp_sizelimit = 12
   $lp_timelimit = 15
   $lp_deref     = 'never'
-  
   $lp_openldap_allow_ldapv2 = 'false'
   $lp_openldap_loglevel     = '8'
   $lp_openldap_sizelimit    = '5000'
