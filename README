@@ -6,9 +6,7 @@ This currently stands as the scratch file for the LDAP module. While under
 development, it has the following goals.
 
 - Provide a generic LDAP type
-  - Allow installation of many types of LDAP servers
     - OpenLDAP (2.3 and 2.4 branches)
-    - Fedora Directory Services/389 server
   - Allow configuration of many types of LDAP servers
     - Each installed type will have a custom provider
   - Provide the ability to create add-on hooks
@@ -35,8 +33,8 @@ Default SSL support: CERT and KEY @ /etc/ssl/{cert,key}/ldap.pem
 BUG: When testing by applying server-only configuration, manifest will install
 client libraries as well. Does implying server configuration mean that I want
 to automatically setup a client?
-    
-    
+
+
 Things that are needed:
   * Authenticated Bind for PAM (Want to create a user to bind as)
   * Break up PAM.D modules into individual templates and re-use across linux variants as appropriate. 
