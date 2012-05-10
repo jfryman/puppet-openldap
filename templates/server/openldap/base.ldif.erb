@@ -1,24 +1,34 @@
 # example.org
 dn: <%= basedn %>
+objectClass: top
 objectClass: dcObject
 objectClass: organization
 o: <%= name %>
 dc: <%= name.split('.')[0] %>
+description: <%= name %>
 
 dn: <%= rootdn %>,<%= basedn %>
+roleOccupant: <%= basedn %>
+objectClass: simpleSecurityObject
+objectClass: organizationalRole
 cn: <%= rootdn.gsub!(/^(..)=/, '') %>
 description: LDAP administrator
-roleOccupant: <%= basedn %>
-objectClass: organizationalRole
-objectClass: top
+userPassword: <%= rootpw %>
 
-dn: ou=People,<%= basedn %>
-ou: People
-objectClass: top
+dn: ou=people,<%= basedn %>
 objectClass: organizationalUnit
+ou: people
 
 # Group, example.org
-dn: ou=Group,<%= basedn %>
-ou: Group
-objectClass: top
+dn: ou=groups,<%= basedn %>
 objectClass: organizationalUnit
+ou: groups
+
+dn: uid=test,ou=people,<%= basedn %>
+objectClass: inetOrgPerson
+uid: test
+cn: I. Test User
+cn: Test User
+surname: User
+mail: test@example.com
+userPassword: pass
