@@ -47,6 +47,9 @@ class ldap::params {
                                'libdb4.2',
                                ]
         }
+	precise: {
+          $openldap_packages = ['slapd', 'ldap-utils', 'libperl5.14']
+	}
         default: {
           $openldap_packages = ['slapd', 'ldap-utils', 'libperl5.10']
         }
