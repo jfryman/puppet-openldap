@@ -17,28 +17,61 @@
 class ldap::client::base(
   $ensure,
   $ssl
-)
- {
-  # Utilize the Anchor Pattern
-  anchor { 'ldap::client::base::begin': }
-  anchor { 'ldap::client::base::end': }
-  
-  Class { 
-    ensure  => $ensure,
-    ssl     => $ssl,
-    require => Anchor['ldap::client::base::begin'],
-    before  => Anchor['ldap::client::base::end'],
-  }
-
+) {
   case $operatingsystem {
     centos,fedora,redhat: {
-      class { 'ldap::client::base::redhat': }
+		  file { '/etc/nsswitch.conf':
+		    ensure  => file,
+		    content => template('ldap/client/redhat/nsswitch.conf.erb'),
+		  }
+		  file { '/etc/pam.d/system-auth':
+		    ensure  => file,
+		    content => template('ldap/client/redhat/system-auth.erb'),
+		  }
     }
     debian,ubuntu: {
-      class { 'ldap::client::base::debian':  }
+		  file { '/etc/nsswitch.conf':
+		    ensure  => file,
+		    content => template('ldap/client/debian/nsswitch.conf.erb'),
+		  }
+		  file { "/etc/pam.d/common-auth":
+		    ensure => file,
+		    content => template('ldap/client/debian/common-auth.erb'),
+		  }
+		  file { "/etc/pam.d/common-password":
+		    ensure => file,
+		    content => template('ldap/client/debian/common-password.erb'),
+		  }
+		  file { "/etc/pam.d/common-session":
+		    ensure => file,
+		    content => template('ldap/client/debian/common-session.erb'),
+		  }
+		  file { "/etc/pam.d/common-account":
+		    ensure => file,
+		    content => template('ldap/client/debian/common-account.erb'),
+		  }
     }
     opensuse,suse: {
-      class { 'ldap::client::base::suse': }
+		  file { '/etc/nsswitch.conf':
+		    ensure  => file,
+		    content => template('ldap/client/suse/nsswitch.conf.erb'),
+		  }
+		  file { "/etc/pam.d/common-auth":
+		    ensure => file,
+		    content => template('ldap/client/suse/common-auth.erb'),
+		  }
+		  file { "/etc/pam.d/common-password":
+		    ensure => file,
+		    content => template('ldap/client/suse/common-password.erb'),
+		  }
+		  file { "/etc/pam.d/common-session":
+		    ensure => file,
+		    content => template('ldap/client/suse/common-session.erb'),
+		  }
+		  file { "/etc/pam.d/common-account":
+		    ensure => file,
+		    content => template('ldap/client/suse/common-account.erb'),
+		  }
     }
   }
 }

@@ -52,6 +52,7 @@ class ldap::params {
 	}
         default: {
           $openldap_packages = ['slapd', 'ldap-utils', 'libperl5.10']
+          $openldap_client_packages = ['libnss-ldap', 'nscd', 'libpam-ldap', 'ldap-utils']
         }
       }
     }
@@ -67,13 +68,20 @@ class ldap::params {
       $lp_openldap_var_dir = '/var/lib/ldap'
       $lp_openldap_modulepath = 'UNDEF'
 
+      $client = {
+        
+      }
+
+
       case $::operatingsystem {
         suse: {
           $openldap_packages = ['openldap2', 'libltdl7', 'openldap2-back-meta']
+          $openldap_client_packages = ['pam_ldap', 'nss_ldap', 'openldap2-client']
         }
         default: {
           # Default case is RHEL
           $openldap_packages = ['openldap', 'openldap-servers', 'openldap-clients']
+          $openldap_client_packages =  ['openldap', 'openldap-clients', 'nss_ldap']
         }
       }
     }

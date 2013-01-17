@@ -31,34 +31,46 @@ define ldap::client::config (
   $ssl,
   $servers
 ) {  
-  # Utilize the Anchor Pattern
-  anchor { 'ldap::client::config::begin': 
-    require => Class['ldap::client::base'],
-  }
-  anchor { 'ldap::client::config::end': 
-    notify => Class['ldap::client::service']
-  }
-  
-  Class { 
-    base_dn => $base_dn,
-    ssl     => $ssl,
-    servers => $servers,
-    require => Anchor['ldap::client::config::begin'],
-    notify  => [
-      Anchor['ldap::client::config::end'],
-      Class['ldap::client::service'],
-    ],
-  }
-
-  case $operatingsystem {
-    centos,fedora,redhat: {
-      class { 'ldap::client::config::redhat': }
-    }
+	File {
+	  owner => 'root',
+	  group => 'root',
+	  mode  => '0644',
+	}
+	
+  case $::operatingsystem {
     debian,ubuntu: {
-      class { 'ldap::client::config::debian':  }
+		  file { '/etc/ldap.conf':
+		    ensure  => file,
+		    content => template('ldap/client/common/nss_pam_ldap.conf.erb'),
+		  }
+		  file { '/etc/ldap/ldap.conf':
+		    ensure  => file,
+		    content => template('ldap/client/common/ldap.conf.erb'), 
+		  }
+		  file { "/etc/libnss-ldap.conf":
+		    ensure  => file,
+		    content => template(
+		      'ldap/client/debian/pam-nss-base.conf.erb',
+		      'ldap/client/debian/libnss-ldap.conf.erb'
+		    ),
+		  }
+		  file { "/etc/pam_ldap.conf":
+		    ensure  => file,
+		    content => template(
+		      'ldap/client/debian/pam-nss-base.conf.erb',
+		      'ldap/client/debian/pam_ldap.conf.erb'
+		    ),
+		  }
     }
-    opensuse,suse: {
-      class { 'ldap::client::config::suse': }
+    default: {
+		  file { '/etc/ldap.conf':
+		    ensure  => file,
+		    content => template('ldap/client/common/nss_pam_ldap.conf.erb'),
+		  }
+		  file { '/etc/openldap/ldap.conf':
+		    ensure  => file,
+		    content => template('ldap/client/common/ldap.conf.erb'), 
+		  }
     }
   }
 }

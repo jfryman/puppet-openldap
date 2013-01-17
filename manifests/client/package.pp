@@ -16,27 +16,8 @@
 # This class file is not called directly
 class ldap::client::package(
   $ensure
-)
- {
-  # Utilize the Anchor Pattern
-  anchor { 'ldap::client::package::begin': }
-  anchor { 'ldap::client::package::end': }
-  
-  Class {
-    ensure  => $ensure,
-    require => Anchor['ldap::client::package::begin'],
-    before  => Anchor['ldap::client::package::end'],
-  }
-
-  case $operatingsystem {
-    centos,fedora,redhat: {
-      class { 'ldap::client::package::redhat': }
-    }
-    debian,ubuntu: {
-      class { 'ldap::client::package::debian': }
-    }
-    opensuse,suse: {
-      class { 'ldap::client::package::suse': }
-    }
+) inherits ldap::params {
+	package { $ldap::params::openldap_client_packages:
+    ensure => $ensure,
   }
 }
