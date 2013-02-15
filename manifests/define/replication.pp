@@ -1,9 +1,9 @@
-# Class: 
+# Class:
 #
 # Description
 #
 # Parameters:
-#   
+#
 # Actions:
 #
 # Requires:
@@ -13,7 +13,7 @@
 
 ## UNDER CONSTRUCTION
 define ldap::define::replication (
-
+  $ensure
 ) {
   File {
     owner   => 'root',
@@ -21,11 +21,12 @@ define ldap::define::replication (
     before  => Class['ldap::server::openldap::service'],
     require => Class['ldap::server::openldap::base'],
   }
+
   $directory_ensure = $ensure ? {
     'present' => 'directory',
     'absent'  => 'absent',
   }
-  
+
   file { "${ldap::params::lp_openldap_var_dir}/${name}/accesslog":
     ensure => $directory_ensure,
     mode   => '0770',

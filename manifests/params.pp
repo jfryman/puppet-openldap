@@ -27,8 +27,8 @@ class ldap::params {
       $lp_openldap_conf_dir = '/etc/ldap'
       $lp_openldap_modulepath = '/usr/lib/ldap'
 
-      # Special configuration for Ubuntu and var_dir. 
-      # Ubuntu has AppArmor installed by default, which 
+      # Special configuration for Ubuntu and var_dir.
+      # Ubuntu has AppArmor installed by default, which
       # fails for any directories located in /var/lib/slapd (debian default)
       # https://bugs.launchpad.net/ubuntu/+source/openldap/+bug/286614
       case $::operatingsystem {
@@ -42,17 +42,20 @@ class ldap::params {
 
       case $::lsbdistcodename {
         lenny: {
-          $openldap_packages = ['odbcinst1debian1', 'unixodbc', 'psmisc',
-                               'libsasl2-modules', 'libslp1', 'libltdl3', 
-                               'libdb4.2',
-                               ]
+          $openldap_packages = [
+            'odbcinst1debian1', 'unixodbc', 'psmisc',
+            'libsasl2-modules', 'libslp1', 'libltdl3',
+            'libdb4.2',
+          ]
         }
-	precise: {
+        precise: {
           $openldap_packages = ['slapd', 'ldap-utils', 'libperl5.14']
-	}
+        }
         default: {
           $openldap_packages = ['slapd', 'ldap-utils', 'libperl5.10']
-          $openldap_client_packages = ['libnss-ldap', 'nscd', 'libpam-ldap', 'ldap-utils']
+          $openldap_client_packages = [
+            'libnss-ldap', 'nscd', 'libpam-ldap', 'ldap-utils'
+          ]
         }
       }
     }
@@ -69,19 +72,25 @@ class ldap::params {
       $lp_openldap_modulepath = 'UNDEF'
 
       $client = {
-        
+
       }
 
 
       case $::operatingsystem {
         suse: {
           $openldap_packages = ['openldap2', 'libltdl7', 'openldap2-back-meta']
-          $openldap_client_packages = ['pam_ldap', 'nss_ldap', 'openldap2-client']
+          $openldap_client_packages = [
+            'pam_ldap', 'nss_ldap', 'openldap2-client'
+          ]
         }
         default: {
           # Default case is RHEL
-          $openldap_packages = ['openldap', 'openldap-servers', 'openldap-clients']
-          $openldap_client_packages =  ['openldap', 'openldap-clients', 'nss_ldap']
+          $openldap_packages = [
+            'openldap', 'openldap-servers', 'openldap-clients'
+          ]
+          $openldap_client_packages =  [
+            'openldap', 'openldap-clients', 'nss_ldap'
+          ]
         }
       }
     }
@@ -90,7 +99,7 @@ class ldap::params {
   $lp_sizelimit = 12
   $lp_timelimit = 15
   $lp_deref     = 'never'
-  $lp_openldap_allow_ldapv2 = 'false'
+  $lp_openldap_allow_ldapv2 = false
   $lp_openldap_loglevel     = '8'
   $lp_openldap_sizelimit    = '5000'
   $lp_openldap_tool_threads = '1'

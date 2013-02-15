@@ -8,16 +8,16 @@
 #
 # *ensure* - (true|false) Enable or disable a configured tree. Disabled trees
 #            will not be deleted, but rather will remain on the file system
-#            for archival purposes. 
-# *basedn* - Base DN for setting up the LDAP server. 
+#            for archival purposes.
+# *basedn* - Base DN for setting up the LDAP server.
 # *rootdn* - Base DN for the administrator acount on an LDAP server.
 # *rootpw* - Password for the administrator account. Will accept any valid
-#          - Hashed (crypt|(s)md5|(s)sha) or plaintext password. 
+#          - Hashed (crypt|(s)md5|(s)sha) or plaintext password.
 #
 # Actions:
 #
 # This definition acts as a proxy class to various server implementations
-# 
+#
 # Requires:
 #
 # Sample Usage:
@@ -26,12 +26,12 @@
 #   basedn   => 'dc=puppetlabs,dc=test',
 #   rootdn   => 'cn=admin',
 #   rootpw   => 'test',
-# } 
+# }
 define ldap::define::domain(
   $ensure = 'present',
-  $basedn,
-  $rootdn,
-  $rootpw
+  $basedn = undef,
+  $rootdn = undef,
+  $rootpw = undef
 ){
   File {
     owner   => 'root',
@@ -71,7 +71,7 @@ define ldap::define::domain(
     ensure  => $directory_ensure,
     owner   => $ldap::params::lp_daemon_user,
     group   => $ldap::params::lp_daemon_group,
-    recurse => 'true',
+    recurse => true,
   }
 
   ## Setup Initial OpenLDAP Database
@@ -93,7 +93,7 @@ define ldap::define::domain(
     path      => '/bin:/sbin:/usr/bin:/usr/sbin',
     user      =>  $ldap::params::lp_daemon_user,
     group     =>  $ldap::params::lp_daemon_group,
-    logoutput => 'true',
+    logoutput => true,
     creates   => "${ldap::params::lp_openldap_var_dir}/${name}/id2entry.bdb",
     require   => Class['ldap::server::rebuild'],
     before    => Class['ldap::server::service'],

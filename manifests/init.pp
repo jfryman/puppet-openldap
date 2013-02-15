@@ -19,21 +19,21 @@
 #
 # Sample Usage:
 #
-# Setup (Bootstrap) and Configuration of this module are currently 
+# Setup (Bootstrap) and Configuration of this module are currently
 # separated in order to allow for multiple LDAP server definitions
 # and multiple LDAP Trees being managed.
 #
 # Bootstrap:
 # node 'server.puppetlabs.test' {
 #   class { 'ldap':
-#     server      => 'true',
-#     ssl         => 'false',
+#     server      => true,
+#     ssl         => false,
 #   }
 # }
 # node 'client.puppetlabs.test' {
 #   class {'ldap':
-#     client  => 'true',
-#     ssl     => 'false',
+#     client  => true,
+#     ssl     => false,
 #   }
 # }
 #
@@ -43,18 +43,18 @@
 #   rootdn   => 'cn=admin',
 #   rootpw   => 'test',
 # }
-# 
+#
 # Client Configuration:
 # ldap::client::config { 'puppetlabs.test':
 #   ensure  => 'present',
 #   servers => 'server',
-#   ssl     => 'false',
+#   ssl     => false,
 #   base_dn => 'dc=puppetlabs,dc=test',
 # }
 class ldap(
-  $client      = 'false',
-  $server      = 'false',
-  $ssl         = 'false',
+  $client      = false,
+  $server      = false,
+  $ssl         = false,
   $ssl_ca      = '',
   $ssl_cert    = '',
   $ssl_key     = ''
@@ -71,18 +71,18 @@ class ldap(
   -> anchor { 'ldap::end': }
 
   # Define Client Specific Information
-  if $client == 'true' {
+  if $client {
     class { 'ldap::client':
-      ensure => 'present',
-      ssl    => $ssl,
+      ensure  => 'present',
+      ssl     => $ssl,
       require => Anchor['ldap::begin::client'],
       before  => Anchor['ldap::end::client'],
     }
   }
 
   # Define Server Specific Information
-  if $server == 'true' {
-    class { 'ldap::server': 
+  if $server {
+    class { 'ldap::server':
       ssl         => $ssl,
       ssl_ca      => $ssl_ca,
       ssl_cert    => $ssl_cert,

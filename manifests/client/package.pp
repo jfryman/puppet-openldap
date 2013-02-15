@@ -1,7 +1,7 @@
 # Class: ldap::client::package
 #
-# This module manages package installation of LDAP PAM/NSS Libraries, based on 
-# operating system. 
+# This module manages package installation of LDAP PAM/NSS Libraries, based on
+# operating system.
 #
 # Parameters:
 #
@@ -16,8 +16,10 @@
 # This class file is not called directly
 class ldap::client::package(
   $ensure
-) inherits ldap::params {
-	package { $ldap::params::openldap_client_packages:
+) {
+  include ldap::params
+
+  package { $ldap::params::openldap_client_packages:
     ensure => $ensure,
   }
 }

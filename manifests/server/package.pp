@@ -1,7 +1,7 @@
 # Class: ldap::server::openldap::package
 #
-# This module manages package installation of OpenLDAP, based on 
-# operating system. 
+# This module manages package installation of OpenLDAP, based on
+# operating system.
 #
 # Parameters:
 #
@@ -15,7 +15,7 @@
 #
 # This class file is not called directly
 class ldap::server::package(
-  $ssl
+  $ssl = undef
 ) {
 
   # Manage the User and Group
@@ -31,7 +31,7 @@ class ldap::server::package(
   group { $ldap::params::lp_daemon_user:
     ensure => 'present',
     gid    => $ldap::params::lp_daemon_gid,
-    before  => Package[$ldap::params::openldap_packages],
+    before => Package[$ldap::params::openldap_packages],
   }
 
   package { $ldap::params::openldap_packages:
@@ -39,10 +39,10 @@ class ldap::server::package(
   }
 
   ## This section modifies the /etc/default file to allow for
-  ## slapd.conf configuration as opposed to the cn=config 
+  ## slapd.conf configuration as opposed to the cn=config
   ## configuration and setup. This section will be removed once
   ## configuration is migrated to cn=config
-  if $operatingsystem == 'Ubuntu' {
+  if $::operatingsystem == 'Ubuntu' {
     file {'/etc/default/slapd':
       ensure  => file,
       owner   => 'root',

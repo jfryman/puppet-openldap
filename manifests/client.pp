@@ -1,6 +1,6 @@
 # Class: ldap::client
 #
-# This module manages LDAP client Configuration 
+# This module manages LDAP client Configuration
 #
 # Parameters:
 #

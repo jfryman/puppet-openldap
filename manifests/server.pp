@@ -1,6 +1,6 @@
 # Class: ldap::server
 #
-# This module manages LDAP Server Configuration 
+# This module manages LDAP Server Configuration
 #
 # Parameters:
 #
@@ -20,10 +20,10 @@ class ldap::server(
   $ssl_key  = ''
 ) {
   anchor { 'ldap::server::begin': }
-  -> class { 'ldap::server::package': 
+  -> class { 'ldap::server::package':
     ssl => $ssl,
   }
-  -> class { 'ldap::server::config': 
+  -> class { 'ldap::server::config':
     ssl      => $ssl,
     ssl_ca   => $ssl_ca,
     ssl_cert => $ssl_cert,
