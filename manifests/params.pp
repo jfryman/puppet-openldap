@@ -66,7 +66,10 @@ class ldap::params {
       $lp_daemon_gid = '55'
       $lp_nsswitch = 'puppet:///modules/ldap/client/nsswitch/nsswitch.conf.redhat'
       $lp_openldap_run_dir = '/var/run/openldap'
-      $lp_openldap_service = 'ldap'
+      $lp_openldap_service = $::osfamily ? {
+        'RedHat' => 'slapd',
+        default  => 'ldap',
+      }
       $lp_openldap_conf_dir = '/etc/openldap'
       $lp_openldap_var_dir = '/var/lib/ldap'
       $lp_openldap_modulepath = 'UNDEF'
