@@ -15,7 +15,7 @@
 # This class file is not called directly.
 class ldap::client(
   $ensure = 'present',
-  $ssl
+  $ssl = false
 ) {
   Class {
     ensure => $ensure,
