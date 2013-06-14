@@ -76,7 +76,7 @@ class ldap::params {
     'Debian': {
       case $::lsbdistcodename {
         '': {
-          warning("${name} needs LSB facts to install on ${::operatingsystem}.")
+          fail("${name} needs LSB facts to install on ${::operatingsystem}.")
         } lenny: {
           $openldap_packages = [
             'odbcinst1debian1', 'unixodbc', 'psmisc',
