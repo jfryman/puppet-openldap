@@ -14,32 +14,66 @@
 #
 # This class file is not called directly
 class ldap::params {
+  if $::kernel != 'Linux' {
+      fail("${name} unsupported for ${::kernel}.")
+  }
 
-  case $::operatingsystem {
-    ubuntu,debian: {
-      $lp_daemon_user = 'openldap'
-      $lp_daemon_group = 'openldap'
-      $lp_daemon_uid = '55'
-      $lp_daemon_gid = '55'
-      $lp_nsswitch = 'puppet:///modules/ldap/client/nsswitch/nsswitch.conf.debian'
-      $lp_openldap_run_dir = '/var/run/slapd'
-      $lp_openldap_service = 'slapd'
-      $lp_openldap_conf_dir = '/etc/ldap'
-      $lp_openldap_modulepath = '/usr/lib/ldap'
+  # Cross-platform compatible variables.
+  $lp_tmp_dir               = '/tmp/openldap'
+  $lp_sizelimit             = 12
+  $lp_timelimit             = 15
+  $lp_deref                 = 'never'
+  $lp_openldap_allow_ldapv2 = false
+  $lp_openldap_loglevel     = '8'
+  $lp_openldap_sizelimit    = '5000'
+  $lp_openldap_tool_threads = '1'
+  $lp_openldap_db_type      = 'bdb'
 
-      # Special configuration for Ubuntu and var_dir.
-      # Ubuntu has AppArmor installed by default, which
-      # fails for any directories located in /var/lib/slapd (debian default)
-      # https://bugs.launchpad.net/ubuntu/+source/openldap/+bug/286614
-      case $::operatingsystem {
-        ubuntu: {
-          $lp_openldap_var_dir = '/var/lib/ldap'
-        }
-        default: {
-          $lp_openldap_var_dir = '/var/lib/slapd'
-        }
-      }
+  # Defaults with OS-specific overrides.
+  $lp_openldap_var_dir = $::operatingsystem ? {
+    'Debian'    => '/var/lib/slapd',
+    default     => '/var/lib/ldap',
+  }
 
+  # Defaults with OS family-specific overrides.
+  $lp_daemon_user = $::osfamily ? {
+    'Debian'    => 'openldap',
+    default     => 'ldap',
+  }
+  $lp_daemon_group = $::osfamily ? {
+    'Debian'    => 'openldap',
+    default     => 'ldap',
+  }
+  $lp_daemon_uid = $::osfamily ? {
+    default     => '55',
+  }
+  $lp_daemon_gid = $::osfamily ? {
+    default     => '55',
+  }
+  $lp_nsswitch = $::osfamily ? {
+    'Debian'    => 'puppet:///modules/ldap/client/nsswitch/nsswitch.conf.debian',
+    default     => 'puppet:///modules/ldap/client/nsswitch/nsswitch.conf.redhat',
+  }
+  $lp_openldap_run_dir = $::osfamily ? {
+    'Debian' => '/var/run/slapd',
+    default  => '/var/run/openldap',
+  }
+  $lp_openldap_service = $::osfamily ? {
+    /(Debian|RedHat)/ => 'slapd',
+    default           => 'ldap',
+  }
+  $lp_openldap_conf_dir = $::osfamily ? {
+    'Debian'    => '/etc/ldap',
+    default     => '/etc/openldap',
+  }
+  $lp_openldap_modulepath = $::osfamily ? {
+    'Debian'    => '/usr/lib/ldap',
+    default     => 'UNDEF',
+  }
+
+  # Packages need to be selected with more complex logic.
+  case $::osfamily {
+    'Debian': {
       case $::lsbdistcodename {
         lenny: {
           $openldap_packages = [
@@ -47,64 +81,29 @@ class ldap::params {
             'libsasl2-modules', 'libslp1', 'libltdl3',
             'libdb4.2',
           ]
-        }
-        precise: {
+        } precise: {
           $openldap_packages = ['slapd', 'ldap-utils', 'libperl5.14']
-        }
-        default: {
+        } default: {
           $openldap_packages = ['slapd', 'ldap-utils', 'libperl5.10']
           $openldap_client_packages = [
             'libnss-ldap', 'nscd', 'libpam-ldap', 'ldap-utils'
           ]
         }
       }
-    }
-    fedora,redhat,centos,suse,opensuse: {
-      $lp_daemon_user = 'ldap'
-      $lp_daemon_group = 'ldap'
-      $lp_daemon_uid = '55'
-      $lp_daemon_gid = '55'
-      $lp_nsswitch = 'puppet:///modules/ldap/client/nsswitch/nsswitch.conf.redhat'
-      $lp_openldap_run_dir = '/var/run/openldap'
-      $lp_openldap_service = $::osfamily ? {
-        'RedHat' => 'slapd',
-        default  => 'ldap',
-      }
-      $lp_openldap_conf_dir = '/etc/openldap'
-      $lp_openldap_var_dir = '/var/lib/ldap'
-      $lp_openldap_modulepath = 'UNDEF'
-
-      $client = {
-
-      }
-
-
-      case $::operatingsystem {
-        suse: {
-          $openldap_packages = ['openldap2', 'libltdl7', 'openldap2-back-meta']
-          $openldap_client_packages = [
-            'pam_ldap', 'nss_ldap', 'openldap2-client'
-          ]
-        }
-        default: {
-          # Default case is RHEL
-          $openldap_packages = [
-            'openldap', 'openldap-servers', 'openldap-clients'
-          ]
-          $openldap_client_packages =  [
-            'openldap', 'openldap-clients', 'nss_ldap'
-          ]
-        }
-      }
+    } 'RedHat': {
+      $openldap_packages = [
+        'openldap', 'openldap-servers', 'openldap-clients'
+      ]
+      $openldap_client_packages =  [
+        'openldap', 'openldap-clients', 'nss_ldap'
+      ]
+    } 'Suse': {
+      $openldap_packages = ['openldap2', 'libltdl7', 'openldap2-back-meta']
+      $openldap_client_packages = [
+        'pam_ldap', 'nss_ldap', 'openldap2-client'
+      ]
+    } default: {
+      fail("${name} unsupported for ${::operatingsystem}.")
     }
   }
-  $lp_tmp_dir = '/tmp/openldap'
-  $lp_sizelimit = 12
-  $lp_timelimit = 15
-  $lp_deref     = 'never'
-  $lp_openldap_allow_ldapv2 = false
-  $lp_openldap_loglevel     = '8'
-  $lp_openldap_sizelimit    = '5000'
-  $lp_openldap_tool_threads = '1'
-  $lp_openldap_db_type      = 'bdb'
 }
