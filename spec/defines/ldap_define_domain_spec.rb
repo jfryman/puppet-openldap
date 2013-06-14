@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe 'ldap::define::domain', :type => 'define' do
+  let(:title) { 'testdomain' }
   context 'on a supported os' do
     let(:facts) { {
       :osfamily => 'RedHat',
@@ -8,7 +9,6 @@ describe 'ldap::define::domain', :type => 'define' do
       :kernel => 'Linux',
     } }
     context 'with required parameters' do
-      let(:title) { 'testdomain' }
       let(:params) { {
         :basedn => 'dc=test,dc=lan',
         :rootdn => 'cn=manager,dc=test,dc=lan',
