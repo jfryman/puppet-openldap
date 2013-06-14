@@ -11,6 +11,7 @@ describe 'ldap::define::acl', :type => 'define' do
     let(:facts) { {
       :osfamily => 'RedHat',
       :operatingsystem => 'RedHat',
+      :kernel => 'Linux',
     } }
     md5name='9180a90a67ec3535bfc0cec21418babe' # md5 of testacl
     it { should contain_file(
