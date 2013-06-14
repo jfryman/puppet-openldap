@@ -15,7 +15,7 @@
 # This class file is not called directly
 class ldap::params {
   if $::kernel != 'Linux' {
-      fail("${name} unsupported for ${::kernel}.")
+      fail("${module_name} unsupported for ${::kernel}.")
   }
 
   # Cross-platform compatible variables.
@@ -76,7 +76,7 @@ class ldap::params {
     'Debian': {
       case $::lsbdistcodename {
         '': {
-          fail("${name} needs LSB facts to install on ${::operatingsystem}.")
+          fail("${module_name} needs LSB facts to install on ${::operatingsystem}.")
         } lenny: {
           $openldap_packages = [
             'odbcinst1debian1', 'unixodbc', 'psmisc',
@@ -105,7 +105,7 @@ class ldap::params {
         'pam_ldap', 'nss_ldap', 'openldap2-client'
       ]
     } default: {
-      fail("${name} unsupported for ${::operatingsystem}.")
+      fail("${module_name} unsupported for ${::operatingsystem}.")
     }
   }
 }
