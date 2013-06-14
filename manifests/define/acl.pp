@@ -11,6 +11,8 @@ define ldap::define::acl(
     require => Class['ldap::server::config'],
   }
 
+  include ldap::params
+
   # Set a unique name for the configuration entity to be created
   # Cannot include some OpenLDAP ACL specific entries as a file system label.
   $unique_name = md5($name)
