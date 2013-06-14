@@ -18,6 +18,8 @@ class ldap::client::base(
   $ensure = undef,
   $ssl    = undef,
 ) {
+  $ensure_real = $ensure
+
   case $::operatingsystem {
     centos,fedora,redhat: {
       file { '/etc/nsswitch.conf':
