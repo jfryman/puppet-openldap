@@ -14,7 +14,7 @@
 #
 # This class file is not called directly.
 class ldap::server(
-  $ssl      = '',
+  $ssl      = false,
   $ssl_ca   = '',
   $ssl_cert = '',
   $ssl_key  = ''
