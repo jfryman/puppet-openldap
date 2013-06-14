@@ -17,14 +17,19 @@ class ldap::client(
   $ensure = 'present',
   $ssl = false
 ) {
-  Class {
+
+  class { 'ldap::client::package':
     ensure => $ensure,
   }
-
-  class { 'ldap::client::package': }
-  -> class { 'ldap::client::base':
-    ssl     => $ssl,
+  class { 'ldap::client::base':
+    ensure    => $ensure,
+    ssl       => $ssl,
   }
-  ~> class { 'ldap::client::service': }
-  -> Class['ldap::client']
+  class { 'ldap::client::service':
+    ensure    => $ensure,
+    subscribe => [
+      Class['ldap::client::base'],
+      Class['ldap::client::package'],
+    ],
+  }
 }
