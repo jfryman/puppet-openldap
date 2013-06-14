@@ -23,6 +23,6 @@ describe 'ldap', :type=>'class' do
   end
   context 'with params server = true' do
     let(:params) { {:server => true} }
-    it { should contain_class('ldap::server').with_ensure('present') }
+    it { should contain_class('ldap::server') }
   end
 end
