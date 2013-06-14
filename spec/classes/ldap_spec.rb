@@ -7,4 +7,22 @@ describe 'ldap', :type=>'class' do
   it { should contain_anchor('ldap::begin::server') }
   it { should contain_anchor('ldap::end::server') }
   it { should contain_anchor('ldap::end') }
+
+  context 'with params client = true' do
+    let(:params) { {:client => true} }
+    context 'on an unknown operating system' do
+      it { expect { should raise_error(Puppet::Error, /supported/) } }
+    end
+    context 'on a supported operating system' do
+      let(:facts) { {
+        :osfamily => 'RedHat',
+        :operatingsystem => 'CentOS',
+      } }
+      it { should contain_class('ldap::client').with_ensure('present') }
+    end
+  end
+  context 'with params server = true' do
+    let(:params) { {:server => true} }
+    it { should contain_class('ldap::server').with_ensure('present') }
+  end
 end
