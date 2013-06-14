@@ -26,7 +26,6 @@ class ldap::client(
     ssl       => $ssl,
   }
   class { 'ldap::client::service':
-    ensure    => $ensure,
     subscribe => [
       Class['ldap::client::base'],
       Class['ldap::client::package'],
