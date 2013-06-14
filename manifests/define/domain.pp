@@ -33,6 +33,7 @@ define ldap::define::domain(
   $rootdn = undef,
   $rootpw = undef
 ){
+  include ldap::params
   File {
     owner   => 'root',
     group   => $ldap::params::lp_daemon_group,
