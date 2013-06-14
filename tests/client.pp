@@ -1,9 +1,9 @@
-# Class: 
+# Class:
 #
 # Description
 #
 # Parameters:
-#   
+#
 # Actions:
 #
 # Requires:
@@ -12,12 +12,12 @@
 #
 
 class {'ldap':
-  client  => 'true',   
+  client  => true,
 }
 
 ldap::client::config { 'frymanet.com':
   ensure  => 'present',
   servers => ['xenon.frymanet.com', 'argon.frymanet.com'],
-  ssl     => 'false',
+  ssl     => false,
   base_dn => 'dc=frymanet,dc=com',
 }
