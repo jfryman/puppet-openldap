@@ -20,6 +20,7 @@ class ldap::server::config (
   $ssl_cert = undef,
   $ssl_key  = undef
 ) {
+  include 'ldap::params'
   File {
     owner => 'root',
     group => $ldap::params::lp_daemon_group,
