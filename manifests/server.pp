@@ -20,17 +20,24 @@ class ldap::server(
   $ssl_key  = ''
 ) {
   anchor { 'ldap::server::begin': }
-  -> class { 'ldap::server::package':
-    ssl => $ssl,
+  class { 'ldap::server::package':
+    ssl     => $ssl,
+    require => Anchor['ldap::server::begin'],
   }
-  -> class { 'ldap::server::config':
+  class { 'ldap::server::config':
     ssl      => $ssl,
     ssl_ca   => $ssl_ca,
     ssl_cert => $ssl_cert,
     ssl_key  => $ssl_key,
+    require  => Class['ldap::server::package'],
   }
-  -> class { 'ldap::server::rebuild': }
-  -> class { 'ldap::server::service': }
-  -> anchor { 'ldap::server::end': }
+  class { 'ldap::server::rebuild':
+    require => Class['ldap::server::config'],
+  }
+  class { 'ldap::server::service':
+    require => Class['ldap::server::rebuild'],
+    before  => Anchor['ldap::server::end'],
+  }
+  anchor { 'ldap::server::end': }
 }
 
