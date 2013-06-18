@@ -15,11 +15,12 @@
 #
 # This class file is not called directly.
 class ldap::server::config (
-  $ssl      = undef,
+  $ssl      = false,
   $ssl_ca   = undef,
   $ssl_cert = undef,
   $ssl_key  = undef
 ) {
+  include 'ldap::params'
   File {
     owner => 'root',
     group => $ldap::params::lp_daemon_group,

@@ -15,7 +15,7 @@
 #
 # This class file is not called directly
 class ldap::client::package(
-  $ensure
+  $ensure='present'
 ) {
   include ldap::params
 
