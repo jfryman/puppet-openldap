@@ -58,10 +58,6 @@ class ldap::params {
     'Debian' => '/var/run/slapd',
     default  => '/var/run/openldap',
   }
-  $lp_openldap_service = $::osfamily ? {
-    /(Debian|RedHat)/ => 'slapd',
-    default           => 'ldap',
-  }
   $lp_openldap_conf_dir = $::osfamily ? {
     'Debian'    => '/etc/ldap',
     default     => '/etc/openldap',
@@ -71,9 +67,10 @@ class ldap::params {
     default     => 'UNDEF',
   }
 
-  # Packages need to be selected with more complex logic.
+  # Service name and packages need to be selected with more complex logic.
   case $::osfamily {
     'Debian': {
+      $lp_openldap_service = 'slapd'
       case $::lsbdistcodename {
         '': {
           fail("${module_name} needs LSB facts to install on ${::operatingsystem}.")
@@ -93,6 +90,12 @@ class ldap::params {
         }
       }
     } 'RedHat': {
+      case $::operatingsystemrelease {
+      /^5\./: {
+        $lp_openldap_service = 'ldap'
+      } /^6\./: {
+        $lp_openldap_service = 'slapd'
+      }
       $openldap_packages = [
         'openldap', 'openldap-servers', 'openldap-clients'
       ]
