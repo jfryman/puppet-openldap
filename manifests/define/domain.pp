@@ -29,10 +29,11 @@
 # }
 define ldap::define::domain(
   $ensure = 'present',
-  $basedn = undef,
-  $rootdn = undef,
-  $rootpw = undef
+  $basedn,
+  $rootdn,
+  $rootpw
 ){
+  include ldap::params
   File {
     owner   => 'root',
     group   => $ldap::params::lp_daemon_group,

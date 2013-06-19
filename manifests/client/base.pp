@@ -15,11 +15,13 @@
 #
 # This class file is not called directly.
 class ldap::client::base(
-  $ensure = undef,
-  $ssl    = undef,
+  $ensure = 'present',
+  $ssl    = false,
 ) {
-  case $::operatingsystem {
-    centos,fedora,redhat: {
+  $ensure_real = $ensure
+
+  case $::osfamily {
+    'RedHat': {
       file { '/etc/nsswitch.conf':
         ensure  => file,
         content => template('ldap/client/redhat/nsswitch.conf.erb'),
@@ -29,7 +31,7 @@ class ldap::client::base(
         content => template('ldap/client/redhat/system-auth.erb'),
       }
     }
-    debian,ubuntu: {
+    'Debian': {
       file { '/etc/nsswitch.conf':
         ensure  => file,
         content => template('ldap/client/debian/nsswitch.conf.erb'),
@@ -51,7 +53,7 @@ class ldap::client::base(
         content => template('ldap/client/debian/common-account.erb'),
       }
     }
-    opensuse,suse: {
+    'Suse': {
       file { '/etc/nsswitch.conf':
         ensure  => file,
         content => template('ldap/client/suse/nsswitch.conf.erb'),

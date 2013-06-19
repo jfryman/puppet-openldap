@@ -27,6 +27,8 @@ define ldap::define::schema(
   $ensure = 'present',
   $source = undef,
 ) {
+
+  include ldap::params
   File {
     owner   => 'root',
     group   => $ldap::params::lp_daemon_group,

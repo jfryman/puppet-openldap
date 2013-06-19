@@ -13,8 +13,11 @@
 
 ## UNDER CONSTRUCTION
 define ldap::define::replication (
-  $ensure
+  $ensure = 'present'
 ) {
+
+  include ldap::params
+
   File {
     owner   => 'root',
     group   => $ldap::params::lp_daemon_group,
