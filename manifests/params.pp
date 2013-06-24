@@ -91,10 +91,11 @@ class ldap::params {
       }
     } 'RedHat': {
       case $::operatingsystemrelease {
-      /^5\./: {
-        $lp_openldap_service = 'ldap'
-      } /^6\./: {
-        $lp_openldap_service = 'slapd'
+        /^5\./: {
+          $lp_openldap_service = 'ldap'
+        } /^6\./: {
+          $lp_openldap_service = 'slapd'
+        }
       }
       $openldap_packages = [
         'openldap', 'openldap-servers', 'openldap-clients'
