@@ -74,16 +74,18 @@ class ldap::params {
       case $::lsbdistcodename {
         '': {
           fail("${module_name} needs LSB facts to install on ${::operatingsystem}.")
-        } lenny: {
+        }
+        lenny: {
           $openldap_packages = [
             'odbcinst1debian1', 'unixodbc', 'psmisc',
             'libsasl2-modules', 'libslp1', 'libltdl3',
             'libdb4.2',
           ]
         }
-        } /precise|wheezy/: {
+        /precise|wheezy/: {
           $openldap_packages = ['slapd', 'ldap-utils', 'libperl5.14']
-        } default: {
+        }
+        default: {
           $openldap_packages = ['slapd', 'ldap-utils', 'libperl5.10']
           $openldap_client_packages = [
             'libnss-ldap', 'nscd', 'libpam-ldap', 'ldap-utils'
