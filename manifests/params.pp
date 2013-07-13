@@ -80,7 +80,8 @@ class ldap::params {
             'libsasl2-modules', 'libslp1', 'libltdl3',
             'libdb4.2',
           ]
-        } precise: {
+        }
+        } /precise|wheezy/: {
           $openldap_packages = ['slapd', 'ldap-utils', 'libperl5.14']
         } default: {
           $openldap_packages = ['slapd', 'ldap-utils', 'libperl5.10']
