@@ -57,7 +57,7 @@ class ldap(
   $ssl         = false,
   $ssl_ca      = '',
   $ssl_cert    = '',
-  $ssl_key     = ''
+  $ssl_key     = '',
   $cn_config   = false,
   $rootdn      = undef,
   $rootpw      = undef,
