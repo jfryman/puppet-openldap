@@ -49,6 +49,6 @@ allow bind_v2
 database config
 <%- end -%>
 <%- if @rootdn -%>
-rootdn <%= @rootdn %>
+rootdn "<%= @rootdn %>"
 rootpw <%= @rootpw %>
 <%- end -%>
