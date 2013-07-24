@@ -14,10 +14,13 @@
 #
 # This class file is not called directly.
 class ldap::server(
-  $ssl      = false,
-  $ssl_ca   = '',
-  $ssl_cert = '',
-  $ssl_key  = ''
+  $ssl       = false,
+  $ssl_ca    = '',
+  $ssl_cert  = '',
+  $ssl_key   = ''
+  $cn_config = undef,
+  $rootdn    = undef,
+  $rootpw    = undef,
 ) {
   anchor { 'ldap::server::begin': }
   class { 'ldap::server::package':
@@ -25,11 +28,14 @@ class ldap::server(
     require => Anchor['ldap::server::begin'],
   }
   class { 'ldap::server::config':
-    ssl      => $ssl,
-    ssl_ca   => $ssl_ca,
-    ssl_cert => $ssl_cert,
-    ssl_key  => $ssl_key,
-    require  => Class['ldap::server::package'],
+    ssl       => $ssl,
+    ssl_ca    => $ssl_ca,
+    ssl_cert  => $ssl_cert,
+    ssl_key   => $ssl_key,
+    cn_config => $cn_config,
+    rootdn    => $rootdn,
+    rootpw    => $rootpw,
+    require   => Class['ldap::server::package'],
   }
   class { 'ldap::server::rebuild':
     require => Class['ldap::server::config'],

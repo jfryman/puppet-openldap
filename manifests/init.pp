@@ -58,6 +58,9 @@ class ldap(
   $ssl_ca      = '',
   $ssl_cert    = '',
   $ssl_key     = ''
+  $cn_config   = false,
+  $rootdn      = undef,
+  $rootpw      = undef,
 ) {
   include stdlib
   include ldap::params
@@ -83,12 +86,15 @@ class ldap(
   # Define Server Specific Information
   if $server {
     class { 'ldap::server':
-      ssl         => $ssl,
-      ssl_ca      => $ssl_ca,
-      ssl_cert    => $ssl_cert,
-      ssl_key     => $ssl_key,
-      require     => Anchor['ldap::begin::server'],
-      before      => Anchor['ldap::end::server'],
+      ssl       => $ssl,
+      ssl_ca    => $ssl_ca,
+      ssl_cert  => $ssl_cert,
+      ssl_key   => $ssl_key,
+      cn_config => $cn_config,
+      rootdn    => $rootdn,
+      rootpw    => $rootpw,
+      require   => Anchor['ldap::begin::server'],
+      before    => Anchor['ldap::end::server'],
     }
   }
 }

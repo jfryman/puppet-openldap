@@ -15,12 +15,19 @@
 #
 # This class file is not called directly.
 class ldap::server::config (
-  $ssl      = false,
-  $ssl_ca   = undef,
-  $ssl_cert = undef,
-  $ssl_key  = undef
+  $ssl       = false,
+  $ssl_ca    = undef,
+  $ssl_cert  = undef,
+  $ssl_key   = undef
+  $cn_config = undef,
+  $rootdn    = undef,
+  $rootpw    = undef,
 ) {
   include 'ldap::params'
+
+  # Give me dat password to go with all the things
+  if $rootdn { validate_string($rootpw) }
+
   File {
     owner => 'root',
     group => $ldap::params::lp_daemon_group,
