@@ -17,7 +17,7 @@ class ldap::server(
   $ssl       = false,
   $ssl_ca    = '',
   $ssl_cert  = '',
-  $ssl_key   = ''
+  $ssl_key   = '',
   $cn_config = undef,
   $rootdn    = undef,
   $rootpw    = undef,

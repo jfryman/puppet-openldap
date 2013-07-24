@@ -18,7 +18,7 @@ class ldap::server::config (
   $ssl       = false,
   $ssl_ca    = undef,
   $ssl_cert  = undef,
-  $ssl_key   = undef
+  $ssl_key   = undef,
   $cn_config = undef,
   $rootdn    = undef,
   $rootpw    = undef,
