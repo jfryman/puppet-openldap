@@ -36,7 +36,7 @@ include <%= scope.lookupvar('ldap::params::lp_openldap_conf_dir') %>/replication
 # Include all extra configured schema types configured on this host
 include <%= scope.lookupvar('ldap::params::lp_openldap_conf_dir') %>/schema.conf
 
-<%- if ssl == 'true' -%>
+<%- if @ssl == 'true' -%>
 TLSCACertificateFile <%= @ssl_ca %>
 TLSCertificateFile <%= @ssl_cert %>
 TLSCertificateKeyFile <%= @ssl_key %>
