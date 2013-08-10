@@ -23,7 +23,7 @@ SLAPD_PIDFILE=
 # sockets.
 # Example usage:
 # SLAPD_SERVICES="ldap://127.0.0.1:389/ ldaps:/// ldapi:///"
-<%- if ssl == 'true' %>
+<%- if @ssl == 'true' %>
 SLAPD_SERVICES="ldap:/// ldaps:/// ldapi:///"
 <%- else %>
 SLAPD_SERVICES="ldap:/// ldapi:///"

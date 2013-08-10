@@ -1,9 +1,9 @@
 # Managed by Puppet
 database  <%= scope.lookupvar('ldap::params::lp_openldap_db_type') %>
-suffix    "<%= basedn %>"
-rootdn    "<%= rootdn %>,<%= basedn %>"
-rootpw    <%= rootpw %>
-directory <%= scope.lookupvar('ldap::params::lp_openldap_var_dir') %>/<%= name %>
+suffix    "<%= @basedn %>"
+rootdn    "<%= @rootdn %>,<%= @basedn %>"
+rootpw    <%= @rootpw %>
+directory <%= scope.lookupvar('ldap::params::lp_openldap_var_dir') %>/<%= @name %>
 
 # Indices to maintain for this database
 index objectClass                       eq,pres
@@ -13,16 +13,16 @@ index cn,uid,memberUid                  eq,pres,approx,sub
 index nisMapName,nisMapEntry            eq,pres,sub
 
 # Puppet Managed ACL permissions
-include <%= scope.lookupvar('ldap::params::lp_openldap_conf_dir') %>/domains/<%= name %>-acl.conf
+include <%= scope.lookupvar('ldap::params::lp_openldap_conf_dir') %>/domains/<%= @name %>-acl.conf
 
 # Default Admin ACLs
 access to attrs=userPassword
     by self write
     by anonymous auth
-    by dn.base="<%= rootdn %>,<%= basedn %>" write
+    by dn.base="<%= @rootdn %>,<%= @basedn %>" write
     by * none
 access to *
     by self write
-    by dn.base="<%= rootdn %>,<%= basedn %>" write
+    by dn.base="<%= @rootdn %>,<%= @basedn %>" write
     by * read
 

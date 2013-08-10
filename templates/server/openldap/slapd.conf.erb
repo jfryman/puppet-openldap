@@ -37,9 +37,9 @@ include <%= scope.lookupvar('ldap::params::lp_openldap_conf_dir') %>/replication
 include <%= scope.lookupvar('ldap::params::lp_openldap_conf_dir') %>/schema.conf
 
 <%- if ssl == 'true' -%>
-TLSCACertificateFile <%= ssl_ca %>
-TLSCertificateFile <%= ssl_cert %>
-TLSCertificateKeyFile <%= ssl_key %>
+TLSCACertificateFile <%= @ssl_ca %>
+TLSCertificateFile <%= @ssl_cert %>
+TLSCertificateKeyFile <%= @ssl_key %>
 <%- end -%>
 
 <%- if scope.lookupvar('ldap::params::lp_openldap_allow_ldapv2') == 'true' -%>
