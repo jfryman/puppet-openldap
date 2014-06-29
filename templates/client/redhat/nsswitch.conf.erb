@@ -30,9 +30,9 @@
 #shadow:    db files nisplus nis
 #group:     db files nisplus nis
 
-passwd:     files <% if ensure_real == 'present' %> ldap <% end %>
-shadow:     files <% if ensure_real == 'present' %> ldap <% end %>
-group:      files <% if ensure_real == 'present' %> ldap <% end %>
+passwd:     files <% if @ensure_real == 'present' %> ldap <% end %>
+shadow:     files <% if @ensure_real == 'present' %> ldap <% end %>
+group:      files <% if @ensure_real == 'present' %> ldap <% end %>
 
 #hosts:     db files nisplus nis dns
 hosts:      files dns
@@ -43,7 +43,7 @@ hosts:      files dns
 #protocols:  nisplus [NOTFOUND=return] files
 #rpc:        nisplus [NOTFOUND=return] files
 #ethers:     nisplus [NOTFOUND=return] files
-#netmasks:   nisplus [NOTFOUND=return] files     
+#netmasks:   nisplus [NOTFOUND=return] files
 
 bootparams: nisplus [NOTFOUND=return] files
 
