@@ -115,4 +115,11 @@ class ldap::params {
       fail("${module_name} unsupported for ${::operatingsystem}.")
     }
   }
+
+  # Virtual package resources so we avoid duplicates when defining the
+  # client and server on the same machine
+  $openldap_combined_packages = unique(flatten([$openldap_packages, $openldap_client_packages]))
+  @package { $openldap_combined_packages:
+    ensure => 'present',
+  }
 }

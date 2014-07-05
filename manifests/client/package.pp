@@ -14,12 +14,8 @@
 # Sample Usage:
 #
 # This class file is not called directly
-class ldap::client::package(
-  $ensure='present'
-) {
+class ldap::client::package {
   include ldap::params
 
-  package { $ldap::params::openldap_client_packages:
-    ensure => $ensure,
-  }
+  realize Package[$ldap::params::openldap_client_packages]
 }
