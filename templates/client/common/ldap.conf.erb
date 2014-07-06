@@ -8,12 +8,12 @@ SIZELIMIT      <%= scope.lookupvar('ldap::params::lp_sizelimit') %>
 TIMELIMIT      <%= scope.lookupvar('ldap::params::lp_timelimit') %>
 DEREF          <%= scope.lookupvar('ldap::params::lp_deref') %>
 
-BASE <%= base_dn %>
+BASE <%= @base_dn %>
 
-<% if ssl == 'true' %>
-URI <% servers.each do |server| %> ldaps://<%= server %> <% end %>
+<% if @ssl == 'true' %>
+URI <% @servers.each do |server| %> ldaps://<%= server %> <% end %>
 <% else %>
-URI <% servers.each do |server| %> ldap://<%= server %> <% end %>
+URI <% @servers.each do |server| %> ldap://<%= server %> <% end %>
 <% end %>
 
 TLS_CACERTDIR /etc/openldap/cacerts
