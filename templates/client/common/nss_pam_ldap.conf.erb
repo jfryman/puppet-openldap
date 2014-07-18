@@ -10,20 +10,20 @@
 #
 
 # Your LDAP server. Must be resolvable without using LDAP.
-# Multiple hosts may be specified, each separated by a 
+# Multiple hosts may be specified, each separated by a
 # space. How long nss_ldap takes to failover depends on
 # whether your LDAP client library supports configurable
 # network or connect timeouts (see bind_timelimit).
 #host 127.0.0.1
 
 # The distinguished name of the search base.
-base <%= base_dn %>
+base <%= @base_dn %>
 
 # Another way to specify your LDAP server is to provide an
 # uri with the server name. This allows to use
 # Unix Domain Sockets to connect to a local LDAP Server.
 #uri ldap://127.0.0.1/
-#uri ldaps://127.0.0.1/   
+#uri ldaps://127.0.0.1/
 #uri ldapi://%2fvar%2frun%2fldapi_sock/
 # Note: %2f encodes the '/' used as directory separator
 
@@ -35,7 +35,7 @@ base <%= base_dn %>
 # Optional: default is to bind anonymously.
 #binddn cn=proxyuser,dc=example,dc=com
 
-# The credentials to bind with. 
+# The credentials to bind with.
 # Optional: default is no credential.
 #bindpw secret
 
@@ -128,7 +128,7 @@ idle_timelimit 3600
 # Michigan LDAP server, and works with Netscape
 # Directory Server if you're using the UNIX-Crypt
 # hash mechanism and not using the NT Synchronization
-# service. 
+# service.
 #pam_password crypt
 
 # Remove old password first, then update in
@@ -294,11 +294,11 @@ nss_initgroups_ignoreusers root,ldap,named,avahi,haldaemon,dbus,radvd,tomcat,rad
 # at present and does not support password policy control
 #pam_sasl_mech DIGEST-MD5
 
-<% if ssl == 'true' %>
-uri <% servers.each do |server| %> ldaps://<%= server %> <% end %>
+<% if @ssl == 'true' %>
+uri <% @servers.each do |server| %> ldaps://<%= server %> <% end %>
 ssl yes
 <% else %>
-uri <% servers.each do |server| %> ldap://<%= server %> <% end %>
+uri <% @servers.each do |server| %> ldap://<%= server %> <% end %>
 ssl no
 <% end %>
 
