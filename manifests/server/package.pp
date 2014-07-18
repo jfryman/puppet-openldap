@@ -34,9 +34,7 @@ class ldap::server::package(
     before => Package[$ldap::params::openldap_packages],
   }
 
-  package { $ldap::params::openldap_packages:
-    ensure => present,
-  }
+  realize Package[$ldap::params::openldap_packages]
 
   ## This section modifies the /etc/default file to allow for
   ## slapd.conf configuration as opposed to the cn=config

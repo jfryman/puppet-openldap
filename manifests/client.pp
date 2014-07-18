@@ -18,9 +18,7 @@ class ldap::client(
   $ssl = false
 ) {
 
-  class { 'ldap::client::package':
-    ensure => $ensure,
-  }
+  include ldap::client::package
   class { 'ldap::client::base':
     ensure    => $ensure,
     ssl       => $ssl,
