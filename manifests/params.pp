@@ -85,6 +85,9 @@ class ldap::params {
         /precise|wheezy/: {
           $openldap_packages = ['slapd', 'ldap-utils', 'libperl5.14']
         }
+        /jessie/: {
+          $openldap_packages = ['slapd', 'ldap-utils']
+        }
         default: {
           $openldap_packages = ['slapd', 'ldap-utils', 'libperl5.10']
           $openldap_client_packages = [
